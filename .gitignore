@@ -1,0 +1,67 @@
+####################################
+# LaTeX temporary files
+####################################
+*.aux
+*.log
+*.out
+*.toc
+*.gz
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.bbl
+*.blg
+
+####################################
+# PDF output (optional)
+####################################
+*.pdf
+
+####################################
+# OS-specific files
+####################################
+.DS_Store
+Thumbs.db
+
+####################################
+# Editor & IDE temporary files
+####################################
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+####################################
+# Python-related
+####################################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+.eggs/
+*.log
+
+####################################
+# Jupyter Notebook checkpoints
+####################################
+.ipynb_checkpoints/
+
+####################################
+# Virtual environments
+####################################
+venv/
+env/
+.env/
+.venv/
+Pipfile.lock
+
+####################################
+# Build or output directories (optional)
+####################################
+build/
+dist/
+output/
+

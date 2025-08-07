@@ -1,0 +1,2 @@
+Dirichlet distribution 3d plot:
+https://chart-studio.plotly.com/~david_avakian/14.embed

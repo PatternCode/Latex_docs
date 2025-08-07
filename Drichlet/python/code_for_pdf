@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import beta
+
+# Define the support range
+a, b = 0.15, 0.35
+
+# Generate x values within the support
+x = np.linspace(a, b, 500)
+
+# Define a Beta distribution on [0, 1] and scale it to [a, b]
+# Here we use Beta(2, 5) as an example; you can change these parameters
+beta_pdf_scaled = beta.pdf((x - a) / (b - a), a=2, b=5) / (b - a)
+
+# Plotting the PDF
+plt.figure(figsize=(8, 4))
+plt.plot(x, beta_pdf_scaled, label='PDF (Beta scaled to [0.15, 0.35])', color='navy')
+plt.fill_between(x, beta_pdf_scaled, alpha=0.2, color='navy')
+plt.title('Probability Density Function with Support [0.15, 0.35]')
+plt.xlabel('Elemental Concentration')
+plt.ylabel('Density')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
