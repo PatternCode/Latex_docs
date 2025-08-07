@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath, amssymb}
 \usepackage{geometry}
-%\usepackage{hyperref}
+%\usepackage{hyperref}    % this keeps all colors and boxes
 \usepackage{fancyhdr}
 \usepackage{setspace}
 \usepackage{caption}
@@ -19,19 +19,9 @@
 \usepackage[most]{tcolorbox}
 \newtheorem{lemma}{Lemma}
 \tcbuselibrary{theorems}
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks]{hyperref}  % his removes all colors and boxes 
 
-%\newtcbtheorem[auto counter, number within=section]{theorem}{Theorem}%
-%{colback=blue!5!white, colframe=blue!75!black,
-%	fonttitle=\bfseries, coltitle=black, boxed title style={colback=white},
-%	enhanced, attach boxed title to top left={xshift=0.5cm,yshift=-1mm}}%
-%{thm}
 
-%\newtcbtheorem[auto counter, number within=section]{lemma}{Lemma}%
-%{colback=blue!5!white, colframe=blue!75!black,
-%	fonttitle=\bfseries, coltitle=black, boxed title style={colback=white},
-%	enhanced, attach boxed title to top left={xshift=0.5cm,yshift=-1mm}}%
-%{lem}
 
 \newtcbtheorem[auto counter, number within=section]{boxedlemma}{Lemma}%
 {colback=blue!5!white, colframe=blue!75!black,
