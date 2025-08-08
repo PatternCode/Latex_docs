@@ -1,0 +1,124 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+% Page setup
+\geometry{margin=1in}
+\setstretch{1.2}
+
+\title{Variational Autoencoder (VAE) Symbols and Definitions}
+\author{}
+\date{}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Introduction}
+	A Variational Autoencoder (VAE) is a generative model that learns to represent data in a lower-dimensional latent space while enabling the generation of new, similar data. This document provides a reference for common symbols, parameters, and concepts used in VAE formulations.
+	
+	\section{Basic Symbols and Definitions}
+	
+	\subsection{\( x \) -- Input Data}
+	\begin{itemize}
+		\item \textbf{Definition:} The observed data point fed into the model.
+		\item \textbf{Example:} For LIBS (Laser-Induced Breakdown Spectroscopy), \( x \) could represent the intensity vector of a measured spectrum.
+	\end{itemize}
+	
+	\subsection{\( z \) -- Latent Variable}
+	\begin{itemize}
+		\item \textbf{Definition:} An unobserved (hidden) variable representing the underlying factors that generate \( x \).
+		\item \textbf{Example:} Composition, plasma temperature, and other physical parameters in LIBS.
+	\end{itemize}
+	
+	\subsection{\( p(z) \) -- Prior Distribution}
+	\begin{itemize}
+		\item \textbf{Definition:} The assumed distribution of \( z \) before seeing any data.
+		\item \textbf{Typical Choice:} \( p(z) = \mathcal{N}(0, I) \) (multivariate standard normal).
+	\end{itemize}
+	
+	\subsection{\( p_\theta(x|z) \) -- Decoder / Likelihood}
+	\begin{itemize}
+		\item \textbf{Definition:} The generative model that outputs a probability distribution over \( x \) given \( z \).
+		\item \textbf{Parameterization:} By decoder network parameters \( \theta \).
+		\item \textbf{Example:} A neural network (or physics model like the NIST LIBS tool) generating a spectrum from latent parameters.
+	\end{itemize}
+	
+	\subsection{\( q_\phi(z|x) \) -- Encoder / Approximate Posterior}
+	\begin{itemize}
+		\item \textbf{Definition:} An inference model that approximates the true posterior \( p(z|x) \).
+		\item \textbf{Parameterization:} By encoder network parameters \( \phi \).
+		\item \textbf{Outputs:} Mean vector \( \mu_\phi(x) \) and standard deviation vector \( \sigma_\phi(x) \).
+	\end{itemize}
+	
+	\subsection{\( \mu \) and \( \sigma \) -- Latent Distribution Parameters}
+	\begin{itemize}
+		\item \textbf{Definition:} Parameters of the Gaussian distribution in the latent space.
+		\item \( \mu_\phi(x) \): best estimate of \( z \) for input \( x \).
+		\item \( \sigma_\phi(x) \): uncertainty of the estimate.
+	\end{itemize}
+	
+	\subsection{\( \epsilon \) -- Noise Variable}
+	\begin{itemize}
+		\item \textbf{Definition:} Random noise drawn from \( \mathcal{N}(0, I) \) for the reparameterization trick:
+		\[
+		z = \mu_\phi(x) + \sigma_\phi(x) \odot \epsilon
+		\]
+	\end{itemize}
+	
+	\subsection{\( z^* \) -- Deterministic Latent Code}
+	\begin{itemize}
+		\item \textbf{Definition:} A fixed (non-random) latent representation, often taken as \( z^* = \mu_\phi(x) \).
+		\item \textbf{Usage:} For deterministic reconstructions or when storing a “best guess” code.
+	\end{itemize}
+	
+	\section{VAE Loss Function}
+	
+	The VAE is trained to maximize the Evidence Lower Bound (ELBO):
+	\[
+	\mathcal{L}(\theta, \phi; x) =
+	\underbrace{\mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)]}_{\text{Reconstruction term}}
+	-
+	\underbrace{\mathrm{KL}\left(q_\phi(z|x) \parallel p(z)\right)}_{\text{Regularization term}}
+	\]
+	
+	\subsection{Reconstruction Term}
+	Measures how well the decoder can reconstruct \( x \) from \( z \).  
+	In LIBS: ``Does the generated spectrum match the real one?''
+	
+	\subsection{KL Divergence Term}
+	The Kullback–Leibler divergence encourages \( q_\phi(z|x) \) to be close to the prior \( p(z) \).  
+	This regularization ensures that latent variables remain consistent with the assumed prior distribution.
+	
+	\section{Summary Table of Symbols}
+	
+	\begin{center}
+		\begin{tabular}{@{}llp{7cm}@{}}
+			\toprule
+			\textbf{Symbol} & \textbf{Name} & \textbf{Meaning / Example in LIBS} \\
+			\midrule
+			\( x \) & Input data & Measured LIBS spectrum \\
+			\( z \) & Latent variable & Composition + plasma parameters \\
+			\( p(z) \) & Prior & Usually \( \mathcal{N}(0, I) \) \\
+			\( p_\theta(x|z) \) & Decoder & Generates spectrum from latent variables \\
+			\( q_\phi(z|x) \) & Encoder & Maps spectrum to latent distribution \\
+			\( \mu \) & Latent mean & Best estimate of parameters \\
+			\( \sigma \) & Latent std. dev. & Uncertainty of parameters \\
+			\( \epsilon \) & Noise variable & Gaussian noise for sampling \\
+			\( z^* \) & Deterministic code & \( \mu \) without sampling \\
+			KL & KL divergence & Regularization term in ELBO \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	
+	\section{Conclusion}
+	This report summarizes the key symbols and parameters used in Variational Autoencoders, with a focus on how they would be interpreted in the context of generating and analyzing LIBS spectra.
+	
+\end{document}
