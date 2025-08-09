@@ -1,0 +1,133 @@
+\documentclass[12pt,a4paper]{article}
+
+% ====== Packages ======
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\usepackage[numbers]{natbib}  % For bibliography
+
+
+% ====== Page setup ======
+\geometry{margin=1in}
+\setstretch{1.2}
+
+% ====== Title ======
+\title{Summary Report: simLIBS Python Library}
+\author{Ehsan Namjoo}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	\tableofcontents
+	\newpage
+	
+	\section{Introduction}
+	\textbf{simLIBS} (SimulatedLIBS) is a Python package for simulating Laser-Induced Breakdown Spectroscopy (LIBS) spectra using spectral data from the NIST LIBS database \cite{NIST_LIBS}. All information about this package is available in \cite{simLIBS2024}. To generate a sample, the following parametres should be set. It is installed with:
+	\begin{verbatim}
+		pip install simLIBS
+	\end{verbatim}
+		and it is compatible with python 3.8 and above. 
+
+	\subsection{Core Features}
+	
+	The main class \texttt{SimulatedLIBS} takes parameters such as:
+	\begin{itemize}
+		\item \texttt{Te}: Electron temperature (eV),
+		\item \texttt{Ne}: Electron density (cm$^{-3}$),
+		\item \texttt{elements}: List of chemical symbols,
+		\item \texttt{percentages}: Atomic composition percentages,
+		\item \texttt{resolution}: Number of spectral points,
+		\item \texttt{low\_w}, \texttt{upper\_w}: Wavelength range (nm),
+		\item \texttt{max\_ion\_charge}: Maximum ionization state,
+		\item \texttt{webscraping}: `'static'` or `'dynamic'` retrieval mode.
+	\end{itemize}
+	To generate a (LIBS) spectrum using the NIST Atomic Spectra Database simulation tool, several important parameters must be specified to accurately represent the plasma conditions and sample composition. First, the elemental composition is defined by selecting one or more elements and assigning their relative percentages, ensuring the total sums to 100\%. The spectral range is determined by setting the lower and upper wavelength limits, which can be specified in units such as angstroms (\AA), nanometers (nm), or micrometers (\textmu m). The spectral resolution parameter controls the width of spectral lines, with higher resolution values producing narrower features. Plasma conditions are characterized primarily by the electron temperature ($T_e$, in electron volts) and electron density ($N_e$, in cm$^{-3}$), which influence the ionization states, population of excited atomic levels, and line broadening effects in the simulated spectrum. Additionally, advanced options allow the user to set a maximum ionization charge state considered in the simulation, apply a minimum relative intensity threshold to exclude weaker lines, and choose the intensity scale as either energy flux or photon flux. Together, these parameters enable tailored and realistic simulations of LIBS spectra under varying experimental conditions.
+	
+	 The electron temperature, \texttt{Te}, given in electron volts (eV), controls the distribution of electrons among energy levels according to the Boltzmann and Saha equations. Higher \texttt{Te} values correspond to hotter plasmas, leading to greater excitation and ionization of atoms, which significantly influences both the intensity and presence of spectral lines. The electron density, \texttt{Ne}, expressed in cm$^{-3}$, determines the number of free electrons in the plasma volume; it plays a critical role in ionization equilibrium and in pressure broadening of spectral features, particularly through Stark broadening mechanisms. The \texttt{elements} parameter specifies the chemical composition of the sample as a list of chemical symbols (for example, \texttt{Fe}, \texttt{Cu}, \texttt{O}), while \texttt{percentages} assigns the relative atomic abundances of these elements, with all percentages summing to 100\%. The spectral resolution is governed by the \texttt{resolution} parameter, which indicates the number of discrete spectral points calculated over the chosen wavelength interval; higher resolution yields finer detail but may increase computation time. The simulation range is set by \texttt{low\_w} and \texttt{upper\_w}, which define the lower and upper wavelength limits in nanometers, thereby selecting the portion of the electromagnetic spectrum to be modeled. The \texttt{max\_ion\_charge} parameter restricts the calculation to a maximum ionization stage (e.g., 2+, 3+), which can be useful to reduce computational load or to exclude highly ionized species unlikely to occur under given plasma conditions. Finally, the \texttt{webscraping} option specifies how the underlying spectral line data are obtained from the NIST database: the mode \texttt{'static'} uses pre-stored local datasets for faster, reproducible simulations, while \texttt{'dynamic'} queries the NIST database in real time to access the most current atomic data available.
+	
+	
+	
+	
+	\subsection{Key Methods}
+	\begin{itemize}
+		\item \verb|plot(color, title)|: Plot the simulated spectrum.
+		\item \verb|get_raw_spectrum()|: Return NIST raw spectral data.
+		\item \verb|get_interpolated_spectrum()|: Cubic spline-interpolated spectrum.
+		\item \verb|save_to_csv(filename)|: Export data to CSV.
+		\item \verb|plot_ion_spectra()|: Display spectra for different ionization stages.
+	\end{itemize}
+	
+	\section{Workflow Diagram}
+%	Figure~\ref{fig:workflow} shows the typical workflow from parameter selection to spectrum generation in \textbf{simLIBS}.
+	
+
+	
+	\section{Dataset Generation}
+	The package provides a \texttt{create\_dataset} method to generate large synthetic datasets from a composition table, varying plasma parameters (\texttt{Te} and \texttt{Ne}) within user-defined ranges.
+	
+	Example input table:
+	
+	\begin{center}
+		\begin{tabular}{cccc}
+			\toprule
+			W & H & He & name \\
+			\midrule
+			50 & 25 & 25 & A \\
+			30 & 60 & 10 & B \\
+			40 & 40 & 20 & C \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	
+	\section{Educational and Visualization Tools}
+	simLIBS supports animated visualizations of how LIBS spectra change with:
+	\begin{itemize}
+		\item Spectral resolution,
+		\item Electron temperature (\texttt{Te}),
+		\item Electron density (\texttt{Ne}).
+	\end{itemize}
+	
+	\section{References and Applications}
+	\begin{itemize}
+		\item Developed by Marcin Kastek (IPPLM).
+		\item Applied in LIBS research:
+		\begin{itemize}
+			\item M. Kastek et al., \textit{Spectrochimica Acta Part B} (2022).
+			\item Chen et al., \textit{Optics Letters} (2023).
+		\end{itemize}
+	\end{itemize}
+	
+	\section{Summary Table}
+	\begin{center}
+		\begin{tabular}{@{}ll@{}}
+			\toprule
+			\textbf{Feature} & \textbf{Description} \\
+			\midrule
+			Purpose & Simulate LIBS spectra using NIST data \\
+			Install & \verb|pip install simLIBS| \\
+			Inputs & Te, Ne, elements, percentages, wavelength range, resolution \\
+			Outputs & Plots, raw/interpolated spectra, CSV files \\
+			Dataset Tool & \verb|create_dataset| for bulk generation \\
+			Educational Use & Animations for teaching \\
+			License & MIT, Python $\geq$ 3.8 \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	
+		% ---------- References ----------
+	\newpage
+	%	\bibliographystyle{plainnat}
+	\bibliographystyle{unsrtnat}
+	%	\bibliographystyle{abbrvnat}
+	\bibliography{references}  % Create a file named references.bib
+	
+
+	
+\end{document}
