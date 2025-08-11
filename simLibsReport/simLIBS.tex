@@ -30,17 +30,19 @@
 	\tableofcontents
 	\newpage
 	\section{Introduction}
-	Simulated LIBS spectra play a crucial role in research and development by providing a cost-effective and flexible alternative to experimental measurements. The simLIBS Python package is a powerful tool designed to simulate LIBS spectra based on input plasma parameters and elemental compositions. It leverages atomic data and spectral libraries to generate realistic spectral profiles over specified wavelength ranges and resolutions.
+	Simulated Laser-induced Breakdown Spectroscopy (LIBS) spectra play a crucial role in research and development by providing a cost-effective and flexible alternative to experimental measurements. The simLIBS Python package is a useful tool designed to simulate LIBS spectra based on input plasma parameters and elemental compositions. It leverages atomic data and spectral libraries to generate realistic spectral profiles over specified wavelength ranges and resolutions.
 	
-	This report introduces the simLIBS package in detail and demonstrates how it can be used to generate LIBS spectra for different steel grades by specifying their elemental compositions. By sampling compositions within typical alloying ranges and balancing iron content accordingly, simLIBS enables the creation of diverse and representative spectral datasets. It is shown that even when selecting widely varying concentrations within the allowable range for a given grade, the resulting spectra do not change significantly. Additionally, it is observed that LIBS spectra of different steel grades from similar families exhibit only minor differences. The report concludes by raising questions regarding the conditions and usefulness of creating LIBS spectral datasets, as well as the structure of machine learning algorithms that could be utilized for LIBS signal classification and concentration estimation. 
+	In this report, the simLIBS package is introduced in detail, and its use in generating LIBS spectra for different steel grades by specifying their elemental compositions is demonstrated. Compositions are sampled within typical alloying ranges, and iron content is balanced accordingly. It is shown that even when concentrations varying widely within the allowable range for a given grade are selected, the resulting spectra are not significantly altered. Additionally, only minor differences are exhibited between LIBS spectra of different steel grades from similar families. It is also demonstrated that plasma physical parameters, plasma temperature and electron density, have a significant effect on the resulting spectra. The report concludes by raising questions regarding the conditions and usefulness of creating LIBS spectral datasets, as well as the structure of machine learning algorithms that could be employed for LIBS signal classification and concentration estimation. 
 	
 	\section{simLIBS package}
-	\textbf{simLIBS} (SimulatedLIBS) is a Python package for simulating Laser-Induced Breakdown Spectroscopy (LIBS) spectra using spectral data from the NIST LIBS database \cite{NIST_LIBS}. All information about this package is available in \cite{simLIBS2024}. The packeg can be easily installed by: 
+	\textbf{simLIBS} (Simulated LIBS) is a Python package designed for simulating LIBS spectra by utilizing spectral data from the NIST LIBS database \cite{NIST_LIBS}. Comprehensive documentation and details about the package can be found in \cite{simLIBS2024}. The package can be easily installed using the following command:
+	
 	\vspace{-0.5em}
 	\begin{verbatim}
 		pip install simLIBS
 	\end{verbatim}
 	\vspace{-1.5em}
+	
 		It is compatible with python 3.8 and above. The following command creates a simulated LIBS spectrum using the \texttt{SimulatedLIBS} class by specifying plasma conditions, elemental composition, and spectral parameters:
 		\vspace{-0.5em}
 		\begin{verbatim}
@@ -56,7 +58,7 @@
 		\end{verbatim}
 		\vspace{-1.5em}
 		
-		Here, \texttt{Te=1.0} sets the electron temperature in electronvolts (eV). The electron temperature, \texttt{Te}, given in electron volts (eV), controls the distribution of electrons among energy levels according to the Boltzmann and Saha equations. Higher \texttt{Te} values correspond to hotter plasmas, leading to greater excitation and ionization of atoms, which significantly influences both the intensity and presence of spectral lines. \texttt{Ne=10\textasciicircum17} defines the electron density in cm\textsuperscript{-3}. The electron density, \texttt{Ne},  determines the number of free electrons in the plasma volume; it plays a critical role in ionization equilibrium and in pressure broadening of spectral features, particularly through Stark broadening mechanisms. The \texttt{elements} parameter specifies the elements included in the plasma—in this case, tungsten (W), iron (Fe), and molybdenum (Mo). Their relative atomic percentages are given by \texttt{percentages=[50,25,25]}, which sum to 100\%.
+		Here, \texttt{Te=1.0} sets the electron temperature in electronvolts (eV). The electron temperature, controls the distribution of electrons among energy levels. Higher \texttt{Te} values correspond to hotter plasmas, leading to greater excitation and ionization of atoms, which significantly influences both the intensity and presence of spectral lines. \texttt{Ne=10\textasciicircum17} defines the electron density in cm\textsuperscript{-3}. The electron density  determines the number of free electrons in the plasma volume. The \texttt{elements} parameter specifies the elements included in the plasma, in this case, tungsten (W), iron (Fe), and molybdenum (Mo). Their relative atomic percentages are given by \texttt{percentages=[50,25,25]}, which sum to 100\%.
 		
 		The \texttt{resolution=1000} parameter controls the number of spectral data points, which indicates the number of discrete spectral points calculated over the chosen wavelength interval; higher resolution yields finer detail but may increase computation time. The wavelength range of the simulation is set from 200 nm to 1000 nm using \texttt{low\_w=200} and \texttt{upper\_w=1000}. The maximum ionization charge state considered for spectral lines is limited by \texttt{max\_ion\_charge=3}. \texttt{max\_ion\_charge} parameter restricts the calculation to a maximum ionization stage (e.g., 2+, 3+), which can be useful to reduce computational load or to exclude highly ionized species unlikely to occur under given plasma conditions.Finally, \texttt{webscraping='static'} indicates that pre-cached atomic data is used for the simulation, avoiding live data scraping.
 		
@@ -84,14 +86,23 @@
 		Finally, the \texttt{plot\_ion\_spectra()} method facilitates the visualization of spectra corresponding 
 		to different ionization stages of the elements included in the simulation.
 		
-		
-		
-		
-		
+	\section{Simulation results}
+	In this section, several simulations using the \texttt{simLIBS} package is conducted to investigate the effect of variations in elemental concentrations and plasma conditions. For the first experiment, two composition sets were defined to represent typical ranges found in industrial AISI 4240 samples. Minimum and maximum elemental concentrations were specified in weight percent, with the iron content calculated as the remainder required to reach a total composition of approximately 100\%. The minimum and maximum values were deliberately extended beyond the predefined range to demonstrate that even with different concentrations, the resulting spectra do not change significantly. Seven elements commonly found in the alloy including carbon (C), iron (Fe), manganese (Mn), molybdenum (Mo), phosphorus (P), silicon (Si), and sulfur (S).
+	
+	The minimum composition set consisted of 0.40\% C, 0.70\% Mn, 0.20\% Mo, 0\% P, 0.15\% Si, and 0\% S, while the maximum composition set included 0.45\% C, 0.90\% Mn, 0.30\% Mo, 0.035\% P, 0.35\% Si, and 0.040\% S. In both cases, the iron content was calculated as the balance necessary to bring the total elemental composition to approximately 100\%, ensuring realistic alloy compositions.
+	
+	LIBS spectra were generated for both composition sets under identical plasma parameters, with the electron temperature fixed at 1.0~eV and the electron density at $1 \times 10^{17}~\text{cm}^{-3}$. A spectral range from 200 to 1000~nm was used, with a resolution of 1000. Ionization states up to the third charge were included in the modeling to accurately account for the plasma emission characteristics.
+	
+	The resulting spectra plotted together for both concentration sets is depicted in Figure \ref{fig:min-max}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{min-max.pdf}
+		\caption{Simulated LIBS spectra of AISI 4240 with different sompositions (min and max ranges).}
+		\label{fig:min-max}
+	\end{figure} 
+	The spectra corresponding to the different composition sets appear to be nearly indistinguishable, effectively overlapping one another. This observation indicates that variations in elemental concentrations within the predefined compositional ranges for AISI 4240 do not significantly affect the overall LIBS spectral profile. In other words, small to moderate changes in alloy composition within these limits result in LIBS spectra that are largely similar.
 
-
-	\section{Workflow Diagram}
-%	Figure~\ref{fig:workflow} shows the typical workflow from parameter selection to spectrum generation in \textbf{simLIBS}.
+	
 	
 
 	
