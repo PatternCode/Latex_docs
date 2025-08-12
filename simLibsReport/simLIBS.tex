@@ -11,7 +11,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 \usepackage[numbers]{natbib}  % For bibliography
-\usepackage{graphicx}    % Figures
+\usepackage{graphicx,booktabs}    % Figures
 
 
 
@@ -87,13 +87,29 @@
 		to different ionization stages of the elements included in the simulation.
 		
 	\section{Simulation results}
-	In this section, several simulations using the \texttt{simLIBS} package is conducted to investigate the effect of variations in elemental concentrations and plasma conditions. For the first experiment, two composition sets were defined to represent typical ranges found in industrial AISI 4240 samples. Minimum and maximum elemental concentrations were specified in weight percent, with the iron content calculated as the remainder required to reach a total composition of approximately 100\%. The minimum and maximum values were deliberately extended beyond the predefined range to demonstrate that even with different concentrations, the resulting spectra do not change significantly. Seven elements commonly found in the alloy including carbon (C), iron (Fe), manganese (Mn), molybdenum (Mo), phosphorus (P), silicon (Si), and sulfur (S).
+	In this section, several simulations using the \texttt{simLIBS} package are conducted to investigate the effects of variations in elemental concentrations and plasma conditions. For the first experiment, two composition sets were selected to represent typical values found in industrial AISI~4340 samples. These two sets, referred to as the \emph{minimum} and \emph{maximum} sets, contain concentrations according to the allowable range of the AISI~4340 grade. The minimum set contains the lower limits of each constituent element, while the maximum set contains the upper limits. For both sets, the iron content was calculated as the remainder required to reach a total composition of approximately $100\%$. In addition to iron, eight elements commonly found in the alloy were considered: carbon (C), manganese (Mn), molybdenum (Mo), phosphorus (P), silicon (Si), sulfur (S), nickel (Ni), and chromium (Cr). Table \ref{tab:astm4340} show the concentration ranges of the alloying elements.
+	\begin{table}[htbp]
+		\centering
+		\caption{ASTM 4340 Steel – Chemical Composition}
+		\label{tab:astm4340}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{@{} llcccccccc @{}} 
+				\toprule
+				\textbf{Standard} & \textbf{Grade} & \textbf{C (\%)} & \textbf{Mn (\%)} & \textbf{P (\%)} & \textbf{S (\%)} & \textbf{Si (\%)} & \textbf{Ni (\%)} & \textbf{Cr (\%)} & \textbf{Mo (\%)} \\
+				\midrule
+				ASTM A29 & 4340 & 0.38--0.43 & 0.60--0.80 & $\leq$0.035 & $\leq$0.040 & 0.15--0.35 & 1.65--2.00 & 0.70--0.90 & 0.20--0.30 \\
+				\bottomrule
+			\end{tabular}%
+		}
+	\end{table}
 	
-	The minimum composition set consisted of 0.40\% C, 0.70\% Mn, 0.20\% Mo, 0\% P, 0.15\% Si, and 0\% S, while the maximum composition set included 0.45\% C, 0.90\% Mn, 0.30\% Mo, 0.035\% P, 0.35\% Si, and 0.040\% S. In both cases, the iron content was calculated as the balance necessary to bring the total elemental composition to approximately 100\%, ensuring realistic alloy compositions.
 	
 	LIBS spectra were generated for both composition sets under identical plasma parameters, with the electron temperature fixed at 1.0~eV and the electron density at $1 \times 10^{17}~\text{cm}^{-3}$. A spectral range from 200 to 1000~nm was used, with a resolution of 1000. Ionization states up to the third charge were included in the modeling to accurately account for the plasma emission characteristics.
 	
-	The resulting spectra plotted together for both concentration sets is depicted in Figure \ref{fig:min-max}
+	The resulting spectra plotted together for both concentration sets is depicted in Figure \ref{fig:min-max}.
+	
+	
+	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.8\textwidth]{min-max.pdf}
@@ -101,6 +117,14 @@
 		\label{fig:min-max}
 	\end{figure} 
 	The spectra corresponding to the different composition sets appear to be nearly indistinguishable, effectively overlapping one another. This observation indicates that variations in elemental concentrations within the predefined compositional ranges for AISI 4240 do not significantly affect the overall LIBS spectral profile. In other words, small to moderate changes in alloy composition within these limits result in LIBS spectra that are largely similar.
+	
+	For the next experiment, under the same consideration as earlier experiment, the spectra for two different steel grades, AISI 4020, and AISI 4140 were compared (See Figure \ref{fig:4020-4140}) and the results show that in this case also no significant differences were observed. suprisingly, the results spectra are very similar to thoses from earlier experiment.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{4020-4140.pdf}
+		\caption{Simulated LIBS spectra of AISI 4020 vs 4140.}
+		\label{fig:4020-4140}
+	\end{figure} 
 
 	
 	
