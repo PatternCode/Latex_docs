@@ -118,7 +118,9 @@
 	\end{figure} 
 	The spectra corresponding to the different composition sets appear to be nearly indistinguishable, effectively overlapping one another. This observation indicates that variations in elemental concentrations within the predefined compositional ranges for AISI 4240 do not significantly affect the overall LIBS spectral profile. In other words, small to moderate changes in alloy composition within these limits result in LIBS spectra that are largely similar.
 	
-	For the next experiment, under the same consideration as earlier experiment, the spectra for two different steel grades, AISI 4020, and AISI 4140 were compared (See Figure \ref{fig:4020-4140}) and the results show that in this case also no significant differences were observed. suprisingly, the results spectra are very similar to thoses from earlier experiment.
+	For the next experiment, under the same conditions as in the earlier experiment, the spectra of two different steel grades, AISI~4020 and AISI~4140, were compared (see Figure~\ref{fig:4020-4140}). The compositions for each grade were sampled uniformly within the predefined range for that grade. The results showed that, in this case as well, no significant differences were observed. Interestingly, the resulting spectra were very similar to those obtained in the earlier experiment for AISI~4340. The shapes of the spectra from both experiments are nearly identical; the only noticeable difference is that the peaks in the second experiment are slightly higher. This difference could be attributed to the higher percentage of iron, the predominant constituent, in the second experiment.
+	
+	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.8\textwidth]{4020-4140.pdf}
@@ -126,8 +128,43 @@
 		\label{fig:4020-4140}
 	\end{figure} 
 
+	As the third experiment, under the same conditions, the spectra of four different steel grades—AISI~4140, AISI~304, AISI~1095, and AISI~4340—are presented in a single plot (see Figure~\ref{fig:4041-304-1095-4340}). 
 	
+ 	I was observed that all four grades exhibit broadly similar spectral profiles, with pronounced peaks in the 220–280~nm region and significantly lower intensities beyond 300~nm. The pattern of peaks across all spectra, closely resembling the patterns observed in earlier experiments. The spectra of AISI~4140, AISI~1095, and AISI~4340 are nearly identical in both shape and intensity, indicating similar elemental compositions dominated by iron with only minor alloying differences. In contrast, the spectrum of AISI~304 shows slight deviations, particularly in the relative intensities of the main peaks near 230~nm and 260~nm. These differences are most likely attributable to its higher nickel and chromium contents compared to the other grades. 
+ 	
+ 	
 	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{4041-304-1095-4340.pdf}
+		\caption{Simulated LIBS spectra of four different steel grades.}
+		\label{fig:4041-304-1095-4340}
+	\end{figure} 
+	
+	For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum is investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) are considered for generating the LIBS spectrum of the AISI~4140 steel grade (See Figure \ref{fig:Effect of T_e}). 
+	
+	In the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of excited states, thereby improving the intensity of high-energy transitions. 
+	
+	However, the intensity improvement does not follow a consistent trend across the entire wavelength range. In the intermediate-wavelength region (350--450~nm), the spectra corresponding to lower electron temperatures ($T_e$) exhibit stronger peaks, and the differences between the three curves become less pronounced. This suggests that lower $T_e$ values may favor transitions from lower-energy states, which are more populated at reduced temperatures.
+	
+	It is also observed that changing the electron temperature affects the overall curve patterns and may appear to shift the positions of certain peaks. Nevertheless, since the wavelengths associated with specific elements are intrinsic and fixed, any apparent peak shifts are more likely the result of changes in relative intensities. Such intensity variations can lead to misinterpretation in LIBS spectrum analysis.
+	
+		
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{Te.pdf}
+		\caption{Effect of $T_e$ on AISI~4140 spectrum.}
+		\label{fig:Effect of T_e}
+	\end{figure}
+	
+	For the final experiment, the effect of varying the electron density on the LIBS spectrum is investigated. The experimental conditions are the same as in the previous study, except that the electron temperature is fixed at $T_e = 1.0$~eV, while three electron density values are considered: $1\times10^{16}$~cm$^{-3}$, $1\times10^{17}$~cm$^{-3}$, and $1\times10^{18}$~cm$^{-3}$. Figure~\ref{fig:Effect of N_e} illustrates the results for this case.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{Ne.pdf}
+		\caption{Effect of $N_e$ on AISI~4140 spectrum.}
+		\label{fig:Effect of N_e}
+	\end{figure}
 
 	
 	\section{Dataset Generation}
@@ -181,6 +218,14 @@
 			\bottomrule
 		\end{tabular}
 	\end{center}
+	\section{Appendix}
+	From a physical perspective, the population of excited states follows the Boltzmann distribution:
+	\[
+	n_i \propto g_i \exp\left(-\frac{E_i}{k_B T_e}\right)
+	\]
+	where $E_i$ is the excitation energy of state $i$, $g_i$ is its degeneracy, and $k_B$ is Boltzmann’s constant. As $T_e$ increases, the population of higher-energy states rises, leading to stronger emissions at shorter wavelengths. Conversely, lower $T_e$ favors transitions from lower-energy states, which may appear relatively stronger due to the reduced population of higher-energy levels.
+	
+	\textbf{Key takeaway:} The effect of electron temperature on line intensity is wavelength-dependent. High-energy transitions become more prominent at higher $T_e$, while some lower-energy transitions may be relatively stronger at lower $T_e$. The spectral response is thus governed by the excitation energy of each atomic transition.
 	
 		% ---------- References ----------
 	\newpage
