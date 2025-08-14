@@ -60,7 +60,7 @@
 		
 		Here, \texttt{Te=1.0} sets the electron temperature in electronvolts (eV). The electron temperature, controls the distribution of electrons among energy levels. Higher \texttt{Te} values correspond to hotter plasmas, leading to greater excitation and ionization of atoms, which significantly influences both the intensity and presence of spectral lines. \texttt{Ne=10\textasciicircum17} defines the electron density in cm\textsuperscript{-3}. The electron density  determines the number of free electrons in the plasma volume. The \texttt{elements} parameter specifies the elements included in the plasma, in this case, tungsten (W), iron (Fe), and molybdenum (Mo). Their relative atomic percentages are given by \texttt{percentages=[50,25,25]}, which sum to 100\%.
 		
-		The \texttt{resolution=1000} parameter controls the number of spectral data points, which indicates the number of discrete spectral points calculated over the chosen wavelength interval; higher resolution yields finer detail but may increase computation time. The wavelength range of the simulation is set from 200 nm to 1000 nm using \texttt{low\_w=200} and \texttt{upper\_w=1000}. The maximum ionization charge state considered for spectral lines is limited by \texttt{max\_ion\_charge=3}. \texttt{max\_ion\_charge} parameter restricts the calculation to a maximum ionization stage (e.g., 2+, 3+), which can be useful to reduce computational load or to exclude highly ionized species unlikely to occur under given plasma conditions.Finally, \texttt{webscraping='static'} indicates that pre-cached atomic data is used for the simulation, avoiding live data scraping.
+		The \texttt{resolution=1000} parameter controls the number of spectral data points, which indicates the number of discrete spectral points calculated over the chosen wavelength interval; higher resolution yields finer detail. The wavelength range of the simulation is set from 200 nm to 1000 nm using \texttt{low\_w=200} and \texttt{upper\_w=1000}. The maximum ionization charge state considered for spectral lines is limited by \texttt{max\_ion\_charge=3}. \texttt{max\_ion\_charge} parameter restricts the calculation to a maximum ionization stage (e.g., 2+, 3+), which can be useful to reduce computational load or to exclude highly ionized species unlikely to occur under given plasma conditions.Finally, \texttt{webscraping='static'} indicates that pre-cached atomic data is used for the simulation, avoiding live data scraping.
 		
 		The simulated LIBS spectrum can be visualized directly using the \texttt{plot} method. For example, the command
 		
@@ -104,9 +104,7 @@
 	\end{table}
 	
 	
-	LIBS spectra were generated for both composition sets under identical plasma parameters, with the electron temperature fixed at 1.0~eV and the electron density at $1 \times 10^{17}~\text{cm}^{-3}$. A spectral range from 200 to 1000~nm was used, with a resolution of 1000. Ionization states up to the third charge were included in the modeling to accurately account for the plasma emission characteristics.
-	
-	The resulting spectra plotted together for both concentration sets is depicted in Figure \ref{fig:min-max}.
+	LIBS spectra were generated for both composition sets under identical plasma parameters, with the electron temperature fixed at 1.0~eV and the electron density at $1 \times 10^{17}~\text{cm}^{-3}$. A spectral range from 200 to 1000~nm was used, with a resolution of 1000. Ionization states up to the third charge were included in the modeling to accurately account for the plasma emission characteristics. The resulting spectra plotted together for both concentration sets is depicted in Figure \ref{fig:min-max}.
 	
 	
 	
@@ -128,9 +126,8 @@
 		\label{fig:4020-4140}
 	\end{figure} 
 
-	As the third experiment, under the same conditions, the spectra of four different steel grades—AISI~4140, AISI~304, AISI~1095, and AISI~4340—are presented in a single plot (see Figure~\ref{fig:4041-304-1095-4340}). 
-	
- 	I was observed that all four grades exhibit broadly similar spectral profiles, with pronounced peaks in the 220–280~nm region and significantly lower intensities beyond 300~nm. The pattern of peaks across all spectra, closely resembling the patterns observed in earlier experiments. The spectra of AISI~4140, AISI~1095, and AISI~4340 are nearly identical in both shape and intensity, indicating similar elemental compositions dominated by iron with only minor alloying differences. In contrast, the spectrum of AISI~304 shows slight deviations, particularly in the relative intensities of the main peaks near 230~nm and 260~nm. These differences are most likely attributable to its higher nickel and chromium contents compared to the other grades. 
+	As the third experiment, and under the same conditions, the spectra of four different steel grades, namely AISI~4140, AISI~304, AISI~1095, and AISI~4340, were generated (see Figure~\ref{fig:4041-304-1095-4340}). 	
+ 	It was observed that all four grades exhibit broadly similar spectral profiles, with pronounced peaks in the 220–280~nm region and significantly lower intensities beyond 300~nm. The pattern of peaks across all spectra, closely resembling the patterns observed in earlier experiments. The spectra of AISI~4140, AISI~1095, and AISI~4340 are nearly identical in both shape and intensity, indicating similar elemental compositions dominated by iron with only minor alloying differences. In contrast, the spectrum of AISI~304 shows slight deviations, particularly in the relative intensities of the main peaks near 230~nm and 260~nm. These differences are most likely attributable to its higher nickel and chromium contents compared to the other grades. 
  	
  	
 	
@@ -141,9 +138,9 @@
 		\label{fig:4041-304-1095-4340}
 	\end{figure} 
 	
-	For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum is investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) are considered for generating the LIBS spectrum of the AISI~4140 steel grade (See Figure \ref{fig:Effect of T_e}). 
+	For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum was investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) were considered for generating the LIBS spectrum of the AISI~4140 steel grade (See Figure \ref{fig:Effect of T_e}). 
 	
-	In the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of excited states, thereby improving the intensity of high-energy transitions. 
+	According to Figure \ref{fig:Effect of T_e}, in the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of excited states, thereby improving the intensity of high-energy transitions. 
 	
 	However, the intensity improvement does not follow a consistent trend across the entire wavelength range. In the intermediate-wavelength region (350--450~nm), the spectra corresponding to lower electron temperatures ($T_e$) exhibit stronger peaks, and the differences between the three curves become less pronounced. This suggests that lower $T_e$ values may favor transitions from lower-energy states, which are more populated at reduced temperatures.
 	
@@ -157,14 +154,11 @@
 		\label{fig:Effect of T_e}
 	\end{figure}
 	
-	For the final experiment, the effect of varying the electron density on the LIBS spectrum is investigated. The experimental conditions are the same as in the previous study, except that the electron temperature is fixed at $T_e = 1.0$~eV, while three electron density values are considered: $1\times10^{16}$~cm$^{-3}$, $1\times10^{17}$~cm$^{-3}$, and $1\times10^{18}$~cm$^{-3}$. Figure~\ref{fig:Effect of N_e} illustrates the results for this case.
+	For the final experiment, the effect of varying the electron density on the LIBS spectrum was investigated. The experimental conditions are the same as in the previous experiment, except that the electron temperature is fixed at $T_e = 1.0$~eV, while three electron density values are considered: $1\times10^{16}$~cm$^{-3}$, $1\times10^{17}$~cm$^{-3}$, and $1\times10^{18}$~cm$^{-3}$. Figure~\ref{fig:Effect of N_e} illustrates the results for this case.
 	
-	 As it is observed from the Figure \ref{fig:Effect of N_e}, in the low-wavelength region, all three spectra exhibit strong peaks. The spectrum at $N_e = 1\times 10^{16}$~cm$^{-3}$ shows slightly higher peak intensities than the others.
+	 As it is observed from the Figure \ref{fig:Effect of N_e}, in the low-wavelength region, all three spectra exhibit strong peaks. The spectrum for $N_e = 1\times 10^{16}$~cm$^{-3}$ shows slightly higher peak intensities than the others. It seems that for the low-wavelength region, the $N_e$ has a inverse effect on the intensities, i.e., spectrum for lower $N_e$ show stronger intensities. This behavior is completly different in the intermediate-wavelength range (300--450~nm), where the $N_e = 1\times 10^{16}$~cm$^{-3}$ case shows more  smaller peaks compared to the other densities.
 	
-	In the intermediate-wavelength range (300--450~nm), the $N_e = 1\times 10^{18}$~cm$^{-3}$ case shows more pronounced smaller peaks compared to the other densities, suggesting enhanced excitation of certain lower-energy transitions at very high electron densities. Beyond 450~nm, all spectra show very low intensities, indicating that the dominant transitions for this material occur in the UV region under the chosen plasma conditions.
-	
-	These results demonstrate that varying $N_e$ primarily affects the relative intensities and widths of the emission lines through collisional excitation, Stark broadening, and possible self-absorption effects, while the peak positions remain unchanged, as the wavelengths are intrinsic to the elements present in the sample.
-	
+		
 	
 	\begin{figure}[h!]
 		\centering
@@ -174,8 +168,17 @@
 	\end{figure}
 
 	
-	\section{Dataset Generation}
-	The package provides a \texttt{create\_dataset} method to generate large synthetic datasets from a composition table, varying plasma parameters (\texttt{Te} and \texttt{Ne}) within user-defined ranges.
+	\section{Discussion}
+	According to the observations presented in last section, the following issues seems to be important to be considered for using LIBS spectrum in qualitative and quantitative elemental analysis of steel alloys. 
+	
+	As observed in Figure~\ref{fig:min-max}, the spectra acquired from the same steel grade, but with two different concentrations of alloying elements, showed no noticeable differences. This suggests that accurately detecting small variations within a specific steel grade is likely to be very challenging. It was also found that the LIBS spectra of two different steel grades from the same category are highly similar, indicating that training a machine learning model on LIBS spectra to reliably classify grades within the same category may also be difficult. In contrast, differences in elemental concentrations become more apparent in the corresponding LIBS spectra when the steel grades belong to distinctly different categories, such as tool steel versus stainless steel.
+	
+	
+	As a general rule of thumb, if there is no significant change in the observed patterns (in this case, the LIBS spectrum), machine learning models designed to recognize and classify such patterns are unlikely to achieve high performance. Moreover, training a model on a dataset with minimal variation can easily result in overfitting. Therefore, in the context of quantitative analysis of LIBS signals using machine learning, it is advisable to include a more diverse range of steel grades in the training set.
+	
+	
+	
+	
 	
 	Example input table:
 	
