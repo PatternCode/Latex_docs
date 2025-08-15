@@ -12,6 +12,8 @@
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 \usepackage[numbers]{natbib}  % For bibliography
 \usepackage{graphicx,booktabs}    % Figures
+\usepackage{enumitem}
+\usepackage{url}
 
 
 
@@ -87,24 +89,24 @@
 		to different ionization stages of the elements included in the simulation.
 		
 	\section{Simulation results}
-	In this section, several simulations using the \texttt{simLIBS} package are conducted to investigate the effects of variations in elemental concentrations and plasma conditions. For the first experiment, two composition sets were selected to represent typical values found in industrial AISI~4340 samples. These two sets, referred to as the \emph{minimum} and \emph{maximum} sets, contain concentrations according to the allowable range of the AISI~4340 grade. The minimum set contains the lower limits of each constituent element, while the maximum set contains the upper limits. For both sets, the iron content was calculated as the remainder required to reach a total composition of approximately $100\%$. In addition to iron, eight elements commonly found in the alloy were considered: carbon (C), manganese (Mn), molybdenum (Mo), phosphorus (P), silicon (Si), sulfur (S), nickel (Ni), and chromium (Cr). Table \ref{tab:astm4340} show the concentration ranges of the alloying elements.
+	In this section, several simulations using the \texttt{simLIBS} package are conducted to investigate the effects of variations in elemental concentrations and plasma conditions. For the first experiment, two composition sets were selected to represent typical values found in industrial AISI~4340 samples. These two sets, referred to as the \emph{minimum} and \emph{maximum} sets, contain concentrations according to the allowable range of the AISI~4340 grade. The minimum set contains the lower limits of each constituent element, while the maximum set contains the upper limits. For both sets, the iron content was calculated as the remainder required to reach a total composition of approximately $100\%$. In addition to iron, eight elements commonly found in the alloy were considered: carbon (C), manganese (Mn), molybdenum (Mo), phosphorus (P), silicon (Si), sulfur (S), nickel (Ni), and chromium (Cr). Table \ref{tab:astm4340} show the concentration ranges of the alloying elements found in AISI~4340.
 	\begin{table}[htbp]
 		\centering
-		\caption{ASTM 4340 Steel – Chemical Composition}
+		\caption{AISI 4340 Steel – Chemical Composition}
 		\label{tab:astm4340}
 		\resizebox{\textwidth}{!}{%
 			\begin{tabular}{@{} llcccccccc @{}} 
 				\toprule
 				\textbf{Standard} & \textbf{Grade} & \textbf{C (\%)} & \textbf{Mn (\%)} & \textbf{P (\%)} & \textbf{S (\%)} & \textbf{Si (\%)} & \textbf{Ni (\%)} & \textbf{Cr (\%)} & \textbf{Mo (\%)} \\
 				\midrule
-				ASTM A29 & 4340 & 0.38--0.43 & 0.60--0.80 & $\leq$0.035 & $\leq$0.040 & 0.15--0.35 & 1.65--2.00 & 0.70--0.90 & 0.20--0.30 \\
+				SAE/AISI & 4340 & 0.38--0.43 & 0.60--0.80 & $\leq$0.035 & $\leq$0.040 & 0.15--0.35 & 1.65--2.00 & 0.70--0.90 & 0.20--0.30 \\
 				\bottomrule
 			\end{tabular}%
 		}
 	\end{table}
 	
 	
-	LIBS spectra were generated for both composition sets under identical plasma parameters, with the electron temperature fixed at 1.0~eV and the electron density at $1 \times 10^{17}~\text{cm}^{-3}$. A spectral range from 200 to 1000~nm was used, with a resolution of 1000. Ionization states up to the third charge were included in the modeling to accurately account for the plasma emission characteristics. The resulting spectra plotted together for both concentration sets is depicted in Figure \ref{fig:min-max}.
+	LIBS spectra were generated for both composition sets under identical plasma parameters, with the electron temperature fixed at 1.0~eV and the electron density at $1 \times 10^{17}~\text{cm}^{-3}$. A spectral range from 200 to 1000~nm was used, with a resolution of 1000. Ionization states up to the third charge were included in the modeling. The resulting spectra plotted together for both concentration sets is depicted in Figure \ref{fig:min-max}.
 	
 	
 	
@@ -114,9 +116,16 @@
 		\caption{Simulated LIBS spectra of AISI 4240 with different sompositions (min and max ranges).}
 		\label{fig:min-max}
 	\end{figure} 
-	The spectra corresponding to the different composition sets appear to be nearly indistinguishable, effectively overlapping one another. This observation indicates that variations in elemental concentrations within the predefined compositional ranges for AISI 4240 do not significantly affect the overall LIBS spectral profile. In other words, small to moderate changes in alloy composition within these limits result in LIBS spectra that are largely similar.
+	The spectra corresponding to the different composition sets appear to be nearly indistinguishable, effectively overlapping one another. This observation indicates that variations in elemental concentrations within the predefined compositional ranges for AISI 4340 do not significantly affect the overall LIBS spectral profile. In other words, small to moderate changes in alloy composition within these limits result in LIBS spectra that are largely similar—indeed, in many cases, effectively indistinguishable.
 	
-	For the next experiment, under the same conditions as in the earlier experiment, the spectra of two different steel grades, AISI~4020 and AISI~4140, were compared (see Figure~\ref{fig:4020-4140}). The compositions for each grade were sampled uniformly within the predefined range for that grade. The results showed that, in this case as well, no significant differences were observed. Interestingly, the resulting spectra were very similar to those obtained in the earlier experiment for AISI~4340. The shapes of the spectra from both experiments are nearly identical; the only noticeable difference is that the peaks in the second experiment are slightly higher. This difference could be attributed to the higher percentage of iron, the predominant constituent, in the second experiment.
+%	For the next experiment, under the same conditions as in the earlier experiment, the spectra of two different alloy steel grades, AISI~4020 and AISI~4140, were compared (see Figure~\ref{fig:4020-4140}). both ot the grades belonged to 4XXX family according to AISI standard. however AISI 4020 is a member of 40XX group which are known as Molybdenum steel, while AISI 4140 is a member of 41xx grouop which as generally known as Chromium-Molybdenum Steel. The compositions for each grade were sampled uniformly within the predefined range for that grade. The results showed that, in this case as well, no significant differences were observed. Interestingly, the resulting spectra were very similar to those obtained in the earlier experiment for AISI~4340. The shapes of the spectra from both experiments are nearly identical; the only noticeable difference is that the peaks in the second experiment are slightly higher. This difference could be attributed to the higher percentage of iron, the predominant constituent, in the second experiment.
+	
+	
+	For the next experiment, conducted under the same conditions as the earlier one, the spectra of two different alloy steel grades (AISI~4020 and AISI~4140) were compared (See Figure~\ref{fig:4020-4140}). Both grades belong to the 4xxx family according to the AISI standard. However, AISI~4020 is part of the 40xx group, commonly referred to as \emph{molybdenum steels}, whereas AISI~4140 belongs to the 41xx group, generally known as \emph{chromium--molybdenum steels}. The compositions of each grade were sampled uniformly within the predefined range specified for that grade.
+	
+	The results showed that, in this case as well, no significant differences were observed. Interestingly, the spectra obtained were very similar to each other and to those from the earlier experiment with AISI~4340. The overall shapes of the spectra from both experiments are nearly identical; the only noticeable difference is that the peaks in the second experiment are slightly higher. This increase could be attributed to the higher proportion of iron, the predominant constituent, in the second experiment. 
+	
+	The objective of these two recent experiments was to emphasize that the LIBS spectrum for a given steel grade, even with substantially different elemental concentrations within its permissible range, may not differ significantly. Furthermore, the LIBS spectra of different steel grades can also appear very similar, making them difficult to distinguish. 
 	
 	
 	\begin{figure}[h!]
@@ -126,9 +135,16 @@
 		\label{fig:4020-4140}
 	\end{figure} 
 
-	As the third experiment, and under the same conditions, the spectra of four different steel grades, namely AISI~4140, AISI~304, AISI~1095, and AISI~4340, were generated (see Figure~\ref{fig:4041-304-1095-4340}). 	
- 	It was observed that all four grades exhibit broadly similar spectral profiles, with pronounced peaks in the 220–280~nm region and significantly lower intensities beyond 300~nm. The pattern of peaks across all spectra, closely resembling the patterns observed in earlier experiments. The spectra of AISI~4140, AISI~1095, and AISI~4340 are nearly identical in both shape and intensity, indicating similar elemental compositions dominated by iron with only minor alloying differences. In contrast, the spectrum of AISI~304 shows slight deviations, particularly in the relative intensities of the main peaks near 230~nm and 260~nm. These differences are most likely attributable to its higher nickel and chromium contents compared to the other grades. 
  	
+ 	As the third experiment, conducted under the same conditions, the spectra of four different steel grades (AISI~4140, AISI~304, AISI~1095, and AISI~4340) were compared (see Figure~\ref{fig:4041-304-1095-4340}).  
+ 	
+ 	All four grades display broadly similar spectral profiles, characterised by pronounced peaks in the 220--280~nm region and markedly lower intensities beyond 300~nm. This general peak pattern is consistent with the results of the earlier experiments, reflecting the dominant contribution of iron to the LIBS signal in all cases. The spectra of AISI~4140, AISI~1095, and AISI~4340 are nearly identical in both shape and absolute intensity, suggesting very similar overall chemical compositions, with iron as the primary constituent and only minor variations in alloying elements such as carbon, manganese, and molybdenum.  
+ 	
+ 	In contrast, the spectrum of AISI~304 exhibits subtle but noticeable deviations from the others. In particular, the relative intensities of the major peaks near 230~nm and 260~nm are slightly different, and the fine structure in the 220--240~nm range shows small variations in peak prominence. These differences are related with AISI~304’s significantly higher chromium content (\(\sim18\%\)) and substantial nickel content (\(\sim8\%\)), compared with the predominantly low-alloy compositions of the other grades. 
+ 	
+   
+ 	
+ 	Overall, while the LIBS spectra of high-alloy stainless steels such as AISI~304 still share the general iron-dominated profile of carbon and low-alloy steels, the relative peak intensities and subtle spectral variations arising from alloying elements can provide useful distinguishing features when analysed carefully.
  	
 	
 	\begin{figure}[h!]
@@ -138,14 +154,57 @@
 		\label{fig:4041-304-1095-4340}
 	\end{figure} 
 	
-	For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum was investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) were considered for generating the LIBS spectrum of the AISI~4140 steel grade (See Figure \ref{fig:Effect of T_e}). 
+%	For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum was investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) were considered for generating the LIBS spectrum of the AISI~4140 steel grade (See Figure \ref{fig:Effect of T_e}). 
+%	
+%	According to Figure \ref{fig:Effect of T_e}, in the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of excited states, thereby improving the intensity of high-energy transitions. 
+%	
+%	However, the intensity improvement does not follow a consistent trend across the entire wavelength range. In the intermediate-wavelength region (350--450~nm), the spectra corresponding to lower electron temperatures ($T_e$) exhibit stronger peaks, and the differences between the three curves become less pronounced. This suggests that lower $T_e$ values may favor transitions from lower-energy states, which are more populated at reduced temperatures.
+%	
+%	It is also observed that changing the electron temperature affects the overall curve patterns and may appear to shift the positions of certain peaks. Nevertheless, since the wavelengths associated with specific elements are intrinsic and fixed, any apparent peak shifts are more likely the result of changes in relative intensities. Such intensity variations can lead to misinterpretation in LIBS spectrum analysis.
 	
-	According to Figure \ref{fig:Effect of T_e}, in the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of excited states, thereby improving the intensity of high-energy transitions. 
 	
-	However, the intensity improvement does not follow a consistent trend across the entire wavelength range. In the intermediate-wavelength region (350--450~nm), the spectra corresponding to lower electron temperatures ($T_e$) exhibit stronger peaks, and the differences between the three curves become less pronounced. This suggests that lower $T_e$ values may favor transitions from lower-energy states, which are more populated at reduced temperatures.
+%	For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum was investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) were considered for generating the LIBS spectrum of the AISI~4140 steel grade (see Figure~\ref{fig:Effect of T_e}).  
+%	
+%	According to Figure~\ref{fig:Effect of T_e}, in the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of excited states, thereby enhancing the intensity of high-energy transitions.  
+%	
+%	However, the intensity improvement does not follow a consistent trend across the entire wavelength range. In the intermediate-wavelength region (350--450~nm), the spectra corresponding to lower electron temperatures ($T_e$) exhibit stronger peaks, and the differences between the three curves become less pronounced. This suggests that lower $T_e$ values may favour transitions from lower-energy states, which are more populated at reduced temperatures according to the Boltzmann distribution. Since the energy of an emitted photon is given by  
+%	\[
+%	E_{\text{photon}} = h\nu = \frac{hc}{\lambda},
+%	\]  
+%	a smaller energy gap between states (\(E_{\text{photon}}\) low) corresponds to a longer wavelength (\(\lambda\) large). Therefore, transitions from lower-energy states are generally found in the longer-wavelength (visible) range, consistent with the observed enhancement of peaks between 350--450~nm at lower $T_e$ values.  
+
+%For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum was investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) were considered for generating the LIBS spectrum of the AISI~4140 steel grade (see Figure~\ref{fig:Effect of T_e}).  
+%
+%According to Figure~\ref{fig:Effect of T_e}, in the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of high-energy excited states, thereby enhancing the intensity of high-energy transitions.  
+%
+%However, the intensity enhancement does not follow a consistent trend across the entire wavelength range. In the intermediate-wavelength region (350--450~nm), the spectra corresponding to lower electron temperatures ($T_e$) exhibit stronger peaks, and the differences between the three curves become less pronounced. This suggests that lower $T_e$ values may favour transitions from lower-energy excited states, which are more heavily populated at reduced temperatures according to the Boltzmann distribution. The energy of a photon emitted during a transition is given by  
+%\[
+%E_{\text{photon}} = h\nu = \frac{hc}{\lambda},
+%\]  
+%where \(h\) is Planck’s constant (\(6.626\times10^{-34}~\mathrm{J\,s}\)), \(c\) is the speed of light in vacuum (\(3.00\times10^8~\mathrm{m/s}\)), \(\nu\) is the photon frequency, and \(\lambda\) is its wavelength. A smaller energy gap between the initial and final states (\(E_{\text{photon}}\) low) corresponds to a longer wavelength (\(\lambda\) large). Consequently, transitions from lower-energy states tend to occur at longer wavelengths (often in the visible range).  
+%
+%At high electron temperatures, although lower-energy states are still populated, the population distribution spreads over many higher-energy states. This broad distribution dilutes the relative population advantage of the low-energy states, meaning their corresponding long-wavelength lines do not experience the same relative enhancement as at lower $T_e$. In contrast, at reduced $T_e$, most atoms remain in the ground or low-lying excited states, making the associated longer-wavelength transitions proportionally stronger in the observed spectrum.  
+%
+%It is also observed that changing the electron temperature affects the overall curve patterns and may appear to shift the positions of certain peaks. Nevertheless, since the wavelengths associated with specific elements are intrinsic and fixed, any apparent peak shifts are more likely the result of changes in relative intensities. Such intensity variations can lead to misinterpretation in LIBS spectrum analysis.
+	For the next experiment, the effect of electron temperature ($T_e$) on the LIBS spectrum was investigated. To this end, three different values of electron temperature (1.0~eV, 0.8~eV, and 0.6~eV) were considered for generating the LIBS spectrum of the AISI~4140 steel grade (see Figure~\ref{fig:Effect of T_e}).  
+	
+	According to Figure~\ref{fig:Effect of T_e}, in the low-wavelength region (200--350~nm), the spectrum for $T_e = 1.0$~eV exhibits the most prominent peaks. The $T_e = 0.8$~eV curve shows moderately strong peaks, while the $T_e = 0.6$~eV curve displays the weakest intensities. This pattern indicates that higher electron temperatures significantly increase the population of high-energy excited states, thereby enhancing the intensity of high-energy transitions.  
+	
+	However, the intensity enhancement does not follow a consistent trend across the entire wavelength range. In the intermediate-wavelength region (350--450~nm), the spectra corresponding to lower electron temperatures ($T_e$) exhibit stronger peaks, and the differences between the three curves become less pronounced. This suggests that lower $T_e$ values may favour transitions from lower-energy excited states, which are more heavily populated at reduced temperatures according to the Boltzmann distribution. The Boltzmann distribution describes how, in a system at thermal equilibrium, the number of particles $N_j$ in an excited state $j$ with energy $E_j$ is related to the number in the ground state $N_0$ by  
+	\[
+	\frac{N_j}{N_0} = \frac{g_j}{g_0} \exp\left(-\frac{E_j - E_0}{k_\mathrm{B} T_e}\right),
+	\]  
+	where $g_j$ and $g_0$ are the statistical weights of the respective states, $k_\mathrm{B}$ is the Boltzmann constant, and $T_e$ is the electron temperature \cite{Cremers2013LIBSHandbook}. As $T_e$ decreases, the exponential term strongly favours lower-energy states, increasing their relative populations. Also the  energy of a photon emitted during a transition is given by  
+	\[
+	E_{\text{photon}} = h\nu = \frac{hc}{\lambda},
+	\]  
+	where \(h\) is Planck’s constant (\(6.626\times10^{-34}~\mathrm{J\,s}\)), \(c\) is the speed of light in vacuum (\(3.00\times10^8~\mathrm{m/s}\)), \(\nu\) is the photon frequency, and \(\lambda\) is its wavelength. A smaller energy gap between the initial and final states (\(E_{\text{photon}}\) low) corresponds to a longer wavelength (\(\lambda\) large). Consequently, transitions from lower-energy states tend to occur at longer wavelengths.  
+	
+	At high electron temperatures, although lower-energy states are still populated, the distribution of electrons spreads over many higher-energy states, reducing the relative population advantage of the low-energy states. This means their corresponding long-wavelength lines do not experience the same relative enhancement as at lower $T_e$. In contrast, at reduced $T_e$, most atoms remain in the ground or low-lying excited states, making the associated longer-wavelength transitions proportionally stronger in the observed spectrum.  
 	
 	It is also observed that changing the electron temperature affects the overall curve patterns and may appear to shift the positions of certain peaks. Nevertheless, since the wavelengths associated with specific elements are intrinsic and fixed, any apparent peak shifts are more likely the result of changes in relative intensities. Such intensity variations can lead to misinterpretation in LIBS spectrum analysis.
 	
+		
 		
 	\begin{figure}[h!]
 		\centering
@@ -157,6 +216,62 @@
 	For the final experiment, the effect of varying the electron density on the LIBS spectrum was investigated. The experimental conditions are the same as in the previous experiment, except that the electron temperature is fixed at $T_e = 1.0$~eV, while three electron density values are considered: $1\times10^{16}$~cm$^{-3}$, $1\times10^{17}$~cm$^{-3}$, and $1\times10^{18}$~cm$^{-3}$. Figure~\ref{fig:Effect of N_e} illustrates the results for this case.
 	
 	 As it is observed from the Figure \ref{fig:Effect of N_e}, in the low-wavelength region, all three spectra exhibit strong peaks. The spectrum for $N_e = 1\times 10^{16}$~cm$^{-3}$ shows slightly higher peak intensities than the others. It seems that for the low-wavelength region, the $N_e$ has a inverse effect on the intensities, i.e., spectrum for lower $N_e$ show stronger intensities. This behavior is completly different in the intermediate-wavelength range (300--450~nm), where the $N_e = 1\times 10^{16}$~cm$^{-3}$ case shows more  smaller peaks compared to the other densities.
+	 
+	 \paragraph{Effect of electron density (\(N_e\)) at fixed \(T_e\).}
+	 With \(T_e\) held at \(1.0~\mathrm{eV}\), varying \(N_e\) primarily alters (i) the ionisation balance, (ii) collisional rates (excitation \& de–excitation), (iii) Stark broadening, (iv) self-absorption, and (v) the continuum baseline. These mechanisms explain the two regimes seen in Fig.~\ref{fig:Effect of N_e}.
+	 
+	 \medskip
+	 \textbf{1) Low-wavelength (UV, \(\sim200\!-\!300~\mathrm{nm}\)) peaks are taller at lower \(N_e\).}
+	 For an optically thin line \(i\!\to\!j\),
+	 \[
+	 I_{ij}\ \propto\ N_u\,A_{ij}\,h\nu,
+	 \qquad
+	 N_u = N_s\,\frac{g_u}{Z_s(T_e)}\,e^{-E_u/k_{\mathrm B}T_e},
+	 \]
+	 so at fixed \(T_e\) the Boltzmann factor is unchanged. What changes with \(N_e\) is the *shape* and apparent height of the lines:
+	 
+	 \begin{itemize}
+	 	\item \emph{Stark broadening}: the FWHM scales roughly linearly with \(N_e\),
+	 	\[
+	 	\Delta\lambda_{\mathrm{Stark}}\ \propto\ N_e,
+	 	\]
+	 	so higher \(N_e\) spreads line area over a wider \(\lambda\) range, reducing peak \emph{height} (even if integrated area is similar) and blending close UV lines.
+	 	
+	 	\item \emph{Collisional de-excitation (quenching)} competes with radiative decay. The effective emission probability is
+	 	\[
+	 	A_{ij}^{\mathrm{eff}} \;=\; \frac{A_{ij}}{1 + C_{u}/A_{ij}}, \qquad
+	 	C_{u}\;=\;N_e\,q_{u} ,
+	 	\]
+	 	so as \(N_e\) increases, \(A_{ij}^{\mathrm{eff}}\) drops and line intensity is suppressed—most noticeably for high-energy UV lines with short upper-level lifetimes.
+	 	
+	 	\item \emph{Self-absorption} increases with optical depth \(\tau\!\propto\! N_l f_{ij} L\); the observed line center scales as \((1-e^{-\tau})/\tau\), which decreases with increasing \(\tau\). Higher \(N_e\) (and total particle density) therefore flattens strong resonance lines in the UV.
+	 	
+	 	\item \emph{Continuum rise}: free–free and free–bound emissivities grow roughly as \(N_e^2\), lifting the baseline and reducing line contrast in the UV.
+	 \end{itemize}
+	 Together, these effects make the low-\(\lambda\) peaks appear \emph{taller and sharper at lower \(N_e\)} (e.g., \(10^{16}~\mathrm{cm^{-3}}\)) and comparatively flattened at higher \(N_e\).
+	 
+	 \medskip
+	 \textbf{2) Intermediate wavelengths (300–450~nm): more \emph{resolved} small peaks at low \(N_e\), but stronger \emph{aggregate} signal at high \(N_e\).}
+	 Two density-dependent processes change the balance here:
+	 
+	 \begin{itemize}
+	 	\item \emph{Ionisation balance (Saha)} at fixed \(T_e\):
+	 	\[
+	 	\frac{n_{i+1}}{n_i}
+	 	=\frac{2\,Z_{i+1}(T_e)}{Z_i(T_e)}
+	 	\left(\frac{2\pi m_e k_{\mathrm B} T_e}{h^2}\right)^{\!3/2}\frac{1}{N_e}\,
+	 	e^{-\chi_i/k_{\mathrm B}T_e}.
+	 	\]
+	 	Increasing \(N_e\) reduces \(n_{i+1}/n_i\), favouring neutrals. Many visible/near-UV lines in steels arise from neutral Fe/Cr/Ni; thus higher \(N_e\) can increase the \emph{population of emitting neutral species}, boosting total emission in this band.
+	 	
+	 	\item \emph{Recombination-assisted population}: radiative and three-body recombination rates scale as \( \propto N_e n_{i+1}\) and \( \propto N_e^2 n_{i+1}\), respectively, feeding low-lying levels that radiate at longer wavelengths. Hence higher \(N_e\) can strengthen groups of lines in the 300–450~nm region.
+	 \end{itemize}
+	 
+	 However, the same Stark broadening that grows with \(N_e\) merges nearby lines and lowers peak \emph{heights}, so at the lowest density (\(10^{16}~\mathrm{cm^{-3}}\)) you often resolve \emph{more} individual, narrow \emph{small} peaks, whereas at higher \(N_e\) those peaks are broader/merged (fewer distinct maxima) but the \emph{aggregate} emission can be larger—matching the behaviour seen in Fig.~\ref{fig:Effect of N_e}.
+	 
+	 \medskip
+	 \textbf{Summary.} In the deep-UV, increasing \(N_e\) primarily flattens and blends strong lines (Stark, quenching, self-absorption) and raises the continuum, so the lowest \(N_e\) shows the tallest peaks. In the 300–450~nm band, higher \(N_e\) favours neutral species and recombination cascades that populate lower-energy levels, enhancing overall emission, while lower \(N_e\) resolves a greater number of narrow, weaker peaks. These complementary density trends quantitatively explain the two-regime behaviour in the measured spectra.
+	 
 	
 		
 	
@@ -176,6 +291,39 @@
 	
 	As a general rule of thumb, if there is no significant change in the observed patterns (in this case, the LIBS spectrum), machine learning models designed to recognize and classify such patterns are unlikely to achieve high performance. Moreover, training a model on a dataset with minimal variation can easily result in overfitting. Therefore, in the context of quantitative analysis of LIBS signals using machine learning, it is advisable to include a more diverse range of steel grades in the training set.
 	
+	
+	The characteristics of a LIBS spectrum---including the number of detected peaks, absolute and relative intensities of atomic emission lines, continuum background, and other features---depend on numerous factors. These include laser pulse energy and duration, focusing conditions, the detection system, and acquisition parameters (integration time, delay time, etc.).  
+	When comparing spectra obtained with different LIBS systems or under varying experimental conditions, these factors must be considered. Even when analysing the same sample, differences in experimental setup will produce spectra that are similar but not identical. According to \cite{AppliedPhotonics2019LIBSQualitative} key points to consider when interpreting a LIBS spectrum are:
+	
+	\begin{enumerate}[label=\textbullet]
+		\item \textbf{Ionisation states:}  
+		Under the typical power densities employed in LIBS experiments (a few tenths of~GW/cm\textsuperscript{2}), spectra generally contain emission lines from neutral atoms (I) and singly ionised species (II). Higher ionisation states are not expected.
+		
+		\item \textbf{Plasma brightness:}  
+		The number of emission peaks detected depends on plasma brightness, which is influenced by laser pulse energy, focusing conditions, and related parameters. A bright/hot plasma produces more and stronger emission lines than a cooler plasma for the same sample.
+		
+		\item \textbf{Sample composition:}  
+		Elemental composition affects line density. For example, pure Fe, Ti, Zr, Ni, or Cr can yield hundreds of peaks, whereas Si, Al, or Zn produce comparatively few.
+		
+		\item \textbf{Acquisition time parameters:}  
+		Both the number and intensity of detected lines depend on integration time and delay time. A delay between plasma formation and detection is often used to reduce continuum emission and Doppler-broadened lines present in the early plasma phase. However, long delays may suppress ionic lines due to their shorter lifetimes compared to neutral lines. The optimal delay time should be determined experimentally.
+		
+		\item \textbf{Spectral interferences:}  
+		Limited spectrometer resolution can cause apparent peaks to be composites of multiple emission lines from the same or different elements.
+		
+		\item \textbf{Element concentration:}  
+		The concentration of an element influences both the number and intensity of its emission lines. Trace elements may show only their strongest lines. Doubling the concentration does not necessarily double line intensities, and identical concentrations in different matrices may yield different intensities (see the tutorial \emph{General Procedure for Quantitative Analysis with LIBS}).
+		
+		\item \textbf{Collection and detection efficiency:}  
+		The efficiency of the optical collection and detection system modulates the observed spectrum. For instance, if BK7 optics are used, ultraviolet emission lines will be blocked and absent from the recorded spectrum.
+		
+		\item \textbf{Practical Issues regarding Te and Ne:}  
+		ter ter ter ter ter ter.
+		
+		\item \textbf{it seems stupid to generate dataset without knowing the phisics and state of nature of the problem:}  
+		ter ter ter ter ter ter
+		
+	\end{enumerate}
 	
 	
 	
