@@ -121,7 +121,7 @@
 %	For the next experiment, under the same conditions as in the earlier experiment, the spectra of two different alloy steel grades, AISI~4020 and AISI~4140, were compared (see Figure~\ref{fig:4020-4140}). both ot the grades belonged to 4XXX family according to AISI standard. however AISI 4020 is a member of 40XX group which are known as Molybdenum steel, while AISI 4140 is a member of 41xx grouop which as generally known as Chromium-Molybdenum Steel. The compositions for each grade were sampled uniformly within the predefined range for that grade. The results showed that, in this case as well, no significant differences were observed. Interestingly, the resulting spectra were very similar to those obtained in the earlier experiment for AISI~4340. The shapes of the spectra from both experiments are nearly identical; the only noticeable difference is that the peaks in the second experiment are slightly higher. This difference could be attributed to the higher percentage of iron, the predominant constituent, in the second experiment.
 	
 	
-	For the next experiment, conducted under the same conditions as the earlier one, the spectra of two different alloy steel grades (AISI~4020 and AISI~4140) were compared (See Figure~\ref{fig:4020-4140}). Both grades belong to the 4xxx family according to the AISI standard. However, AISI~4020 is part of the 40xx group, commonly referred to as \emph{molybdenum steels}, whereas AISI~4140 belongs to the 41xx group, generally known as \emph{chromium--molybdenum steels}. The compositions of each grade were sampled uniformly within the predefined range specified for that grade.
+	For the next experiment, conducted under the same conditions as the earlier one, the spectra of two different alloy steel grades (AISI~4020 and AISI~4140) were compared (See Figure~\ref{fig:4020-4140}). Both grades belong to the 4xxx family according to the AISI standard. However, AISI~4020 is part of the 40xx group, commonly referred to as \emph{molybdenum steels}, whereas AISI~4140 belongs to the 41xx group, generally known as \emph{chromium--molybdenum steels} \cite{runsomSAEgrades}. The compositions of each grade were sampled uniformly within the predefined range specified for that grade.
 	
 	The results showed that, in this case as well, no significant differences were observed. Interestingly, the spectra obtained were very similar to each other and to those from the earlier experiment with AISI~4340. The overall shapes of the spectra from both experiments are nearly identical; the only noticeable difference is that the peaks in the second experiment are slightly higher. This increase could be attributed to the higher proportion of iron, the predominant constituent, in the second experiment. 
 	
@@ -323,6 +323,10 @@
 		\item \textbf{it seems stupid to generate dataset without knowing the phisics and state of nature of the problem:}  
 		ter ter ter ter ter ter
 		
+		\item \textbf{can we use LIBS LIBS in practice to differentiate the very similar steel grades or we should just use LIBS to categorise grades which are very different:}  
+		ter ter ter ter ter ter
+		
+		
 	\end{enumerate}
 	
 	
@@ -384,6 +388,17 @@
 	where $E_i$ is the excitation energy of state $i$, $g_i$ is its degeneracy, and $k_B$ is Boltzmann’s constant. As $T_e$ increases, the population of higher-energy states rises, leading to stronger emissions at shorter wavelengths. Conversely, lower $T_e$ favors transitions from lower-energy states, which may appear relatively stronger due to the reduced population of higher-energy levels.
 	
 	\textbf{Key takeaway:} The effect of electron temperature on line intensity is wavelength-dependent. High-energy transitions become more prominent at higher $T_e$, while some lower-energy transitions may be relatively stronger at lower $T_e$. The spectral response is thus governed by the excitation energy of each atomic transition.
+	
+	
+	In plasma physics and spectroscopy, the concept of electron temperature ($T_e$) is frequently expressed in units of electron volts (eV) rather than in the conventional Kelvin (K). This practice arises from the fact that temperature at the microscopic scale is fundamentally a measure of the average kinetic energy of particles. According to kinetic theory, the mean kinetic energy of a particle is related to the temperature by  
+	\[
+	\langle E \rangle = \frac{3}{2} k_B T,
+	\]  
+	where $\langle E \rangle$ is the average kinetic energy per particle, $k_B$ is the Boltzmann constant, and $T$ is the absolute temperature in Kelvin. Since the energies of atomic and electronic transitions, as well as ionization potentials, are naturally expressed in electron volts, it is convenient to use the same unit for electron temperature.  
+	
+	The conversion between the two units follows from $E = k_B T$, where $1~\text{eV} = 1.602 \times 10^{-19}~\text{J}$. This corresponds to approximately $11{,}600~\text{K}$. Thus, for example, an electron temperature of $T_e = 1.0$~eV corresponds to about $11{,}600$~K, while $T_e = 0.8$~eV and $T_e = 0.6$~eV correspond to roughly $9{,}300$~K and $7{,}000$~K, respectively.  
+	
+	Expressing electron temperature in eV is particularly useful in the context of Laser-Induced Breakdown Spectroscopy (LIBS). In such plasmas, electrons collide with atoms and ions to excite them, and the excitation and ionization energies involved are typically quoted in electron volts. By describing $T_e$ directly in eV, it becomes straightforward to compare the thermal energy of the electron population with the energy thresholds required for specific transitions. For example, if a spectral line of iron requires an excitation energy of about 3~eV, a plasma with $T_e = 1$~eV will only have a small fraction of electrons energetic enough to excite that transition, whereas a plasma with $T_e = 5$~eV will have a much larger fraction of electrons capable of doing so. This direct comparability makes electron volts the most natural and practical unit for electron temperature in plasma spectroscopy.
 	
 		% ---------- References ----------
 	\newpage
