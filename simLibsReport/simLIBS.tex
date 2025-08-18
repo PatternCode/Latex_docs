@@ -7,13 +7,14 @@
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{hyperref}
+%\usepackage{hyperref}   % keep the boxes around numbers
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 \usepackage[numbers]{natbib}  % For bibliography
 \usepackage{graphicx,booktabs}    % Figures
 \usepackage{enumitem}
 \usepackage{url}
+\usepackage[hidelinks]{hyperref}    %hidelinks romoves boxes
 
 
 
@@ -34,7 +35,7 @@
 	\section{Introduction}
 	Simulated Laser-induced Breakdown Spectroscopy (LIBS) spectra play a crucial role in research and development by providing a cost-effective and flexible alternative to experimental measurements. The simLIBS Python package is a useful tool designed to simulate LIBS spectra based on input plasma parameters and elemental compositions. It leverages atomic data and spectral libraries to generate realistic spectral profiles over specified wavelength ranges and resolutions.
 	
-	In this report, the simLIBS package is introduced, and its use in generating LIBS spectra for different steel grades by specifying their elemental compositions is demonstrated. Compositions are sampled within typical alloying ranges, and iron content is balanced accordingly. It is shown that even when concentrations varying widely within the allowable range for a given grade are selected, the resulting spectra are not significantly altered. Additionally, only minor differences are exhibited between LIBS spectra of different steel grades from similar families. It is also demonstrated that plasma physical parameters, plasma temperature and electron density, have a significant effect on the resulting spectra. The report concludes by raising questions about the conditions under which LIBS spectral datasets should be generated, as well as the potential design of machine learning algorithms for LIBS-based signal classification and concentration estimation. 
+	In this report, the simLIBS package is introduced, and its application in generating LIBS spectra for different steel grades based on their elemental compositions is demonstrated. Compositions are sampled within typical alloying ranges, with the iron content adjusted accordingly. The results show that even when concentrations vary widely within the allowable range for a given grade, the resulting spectra are not significantly altered. Furthermore, only minor differences are observed between the LIBS spectra of steel grades from similar families. It is also demonstrated that plasma parameters—namely plasma temperature and electron density—have a significant effect on the resulting spectra. The report concludes by outlining the conditions under which LIBS spectral datasets should be generated, as well as the potential design of machine learning algorithms for LIBS-based signal classification and concentration estimation. 
 	
 	\section{simLIBS package}
 	\textbf{simLIBS} (Simulated LIBS) is a Python package designed for simulating LIBS spectra by utilizing spectral data from the NIST LIBS database \cite{NIST_LIBS}. Comprehensive documentation and details about the package can be found in \cite{simLIBS2024}. The package can be easily installed using the following command:
@@ -186,66 +187,8 @@
 	
 	 As it is observed from the Figure \ref{fig:Effect of N_e}, in the low-wavelength region, all three spectra exhibit strong peaks. The spectrum for $N_e = 1\times 10^{16}$~cm$^{-3}$ shows slightly higher peak intensities than the others. It seems that for the low-wavelength region, the $N_e$ has a inverse effect on the intensities, i.e., spectrum for lower $N_e$ show stronger intensities. This behavior is completly different in the intermediate-wavelength range (300--450~nm), where the $N_e = 1\times 10^{16}$~cm$^{-3}$ case shows more  smaller peaks compared to the other densities.
 	 
-	 When the electron density ($N_e$) is varied at a fixed electron temperature ($T_e$), the UV region of the spectrum (approximately 200--300~nm) is most sensitive to density effects. At low $N_e$, the UV peaks are sharp and tall because there is little collisional de-excitation, minimal self-absorption, and low continuum emission. As $N_e$ increases, Stark broadening spreads the line over a wider wavelength range, collisional quenching reduces the effective emission, and self-absorption flattens strong resonance lines. In addition, the continuum background rises roughly as $N_e^2$, further reducing the contrast of individual lines. Together, these effects make the low-wavelength UV peaks appear tallest and most distinct at low electron densities and progressively flattened and blended at higher densities.  
-	 
-	 In the intermediate-wavelength range (roughly 300--450~nm), the behavior is different. Increasing $N_e$ favors the population of neutral atoms through recombination and modifies the ionisation balance, which enhances the overall emission in this band. However, the same higher density also increases Stark broadening, merging closely spaced lines. As a result, at low $N_e$, the spectrum shows many narrow, resolved peaks, while at high $N_e$, the number of distinct peaks decreases but the total emission intensity grows, producing fewer but stronger spectral features. These complementary trends in the UV and visible bands explain the characteristic two-regime behavior observed in plasma spectra.
 	 
 	 
-%	 \paragraph{Effect of electron density (\(N_e\)) at fixed \(T_e\).}
-%	 With \(T_e\) held at \(1.0~\mathrm{eV}\), varying \(N_e\) primarily alters (i) the ionisation balance, (ii) collisional rates (excitation \& de–excitation), (iii) Stark broadening, (iv) self-absorption, and (v) the continuum baseline. These mechanisms explain the two regimes seen in Fig.~\ref{fig:Effect of N_e}.
-%	 
-%	 \medskip
-%	 \textbf{1) Low-wavelength (UV, \(\sim200\!-\!300~\mathrm{nm}\)) peaks are taller at lower \(N_e\).}
-%	 For an optically thin line \(i\!\to\!j\),
-%	 \[
-%	 I_{ij}\ \propto\ N_u\,A_{ij}\,h\nu,
-%	 \qquad
-%	 N_u = N_s\,\frac{g_u}{Z_s(T_e)}\,e^{-E_u/k_{\mathrm B}T_e},
-%	 \]
-%	 so at fixed \(T_e\) the Boltzmann factor is unchanged. What changes with \(N_e\) is the *shape* and apparent height of the lines:
-%	 
-%	 \begin{itemize}
-%	 	\item \emph{Stark broadening}: the FWHM scales roughly linearly with \(N_e\),
-%	 	\[
-%	 	\Delta\lambda_{\mathrm{Stark}}\ \propto\ N_e,
-%	 	\]
-%	 	so higher \(N_e\) spreads line area over a wider \(\lambda\) range, reducing peak \emph{height} (even if integrated area is similar) and blending close UV lines.
-%	 	
-%	 	\item \emph{Collisional de-excitation (quenching)} competes with radiative decay. The effective emission probability is
-%	 	\[
-%	 	A_{ij}^{\mathrm{eff}} \;=\; \frac{A_{ij}}{1 + C_{u}/A_{ij}}, \qquad
-%	 	C_{u}\;=\;N_e\,q_{u} ,
-%	 	\]
-%	 	so as \(N_e\) increases, \(A_{ij}^{\mathrm{eff}}\) drops and line intensity is suppressed—most noticeably for high-energy UV lines with short upper-level lifetimes.
-%	 	
-%	 	\item \emph{Self-absorption} increases with optical depth \(\tau\!\propto\! N_l f_{ij} L\); the observed line center scales as \((1-e^{-\tau})/\tau\), which decreases with increasing \(\tau\). Higher \(N_e\) (and total particle density) therefore flattens strong resonance lines in the UV.
-%	 	
-%	 	\item \emph{Continuum rise}: free–free and free–bound emissivities grow roughly as \(N_e^2\), lifting the baseline and reducing line contrast in the UV.
-%	 \end{itemize}
-%	 Together, these effects make the low-\(\lambda\) peaks appear \emph{taller and sharper at lower \(N_e\)} (e.g., \(10^{16}~\mathrm{cm^{-3}}\)) and comparatively flattened at higher \(N_e\).
-%	 
-%	 \medskip
-%	 \textbf{2) Intermediate wavelengths (300–450~nm): more \emph{resolved} small peaks at low \(N_e\), but stronger \emph{aggregate} signal at high \(N_e\).}
-%	 Two density-dependent processes change the balance here:
-%	 
-%	 \begin{itemize}
-%	 	\item \emph{Ionisation balance (Saha)} at fixed \(T_e\):
-%	 	\[
-%	 	\frac{n_{i+1}}{n_i}
-%	 	=\frac{2\,Z_{i+1}(T_e)}{Z_i(T_e)}
-%	 	\left(\frac{2\pi m_e k_{\mathrm B} T_e}{h^2}\right)^{\!3/2}\frac{1}{N_e}\,
-%	 	e^{-\chi_i/k_{\mathrm B}T_e}.
-%	 	\]
-%	 	Increasing \(N_e\) reduces \(n_{i+1}/n_i\), favouring neutrals. Many visible/near-UV lines in steels arise from neutral Fe/Cr/Ni; thus higher \(N_e\) can increase the \emph{population of emitting neutral species}, boosting total emission in this band.
-%	 	
-%	 	\item \emph{Recombination-assisted population}: radiative and three-body recombination rates scale as \( \propto N_e n_{i+1}\) and \( \propto N_e^2 n_{i+1}\), respectively, feeding low-lying levels that radiate at longer wavelengths. Hence higher \(N_e\) can strengthen groups of lines in the 300–450~nm region.
-%	 \end{itemize}
-%	 
-%	 However, the same Stark broadening that grows with \(N_e\) merges nearby lines and lowers peak \emph{heights}, so at the lowest density (\(10^{16}~\mathrm{cm^{-3}}\)) you often resolve \emph{more} individual, narrow \emph{small} peaks, whereas at higher \(N_e\) those peaks are broader/merged (fewer distinct maxima) but the \emph{aggregate} emission can be larger—matching the behaviour seen in Fig.~\ref{fig:Effect of N_e}.
-%	 
-%	 \medskip
-%	 \textbf{Summary.} In the deep-UV, increasing \(N_e\) primarily flattens and blends strong lines (Stark, quenching, self-absorption) and raises the continuum, so the lowest \(N_e\) shows the tallest peaks. In the 300–450~nm band, higher \(N_e\) favours neutral species and recombination cascades that populate lower-energy levels, enhancing overall emission, while lower \(N_e\) resolves a greater number of narrow, weaker peaks. These complementary density trends quantitatively explain the two-regime behaviour in the measured spectra.
-%	 
 	
 		
 	
@@ -258,147 +201,87 @@
 
 	
 	\section{Discussion}
-	According to the observations presented in last section, the following issues seems to be important to be considered for using LIBS spectrum in qualitative and quantitative elemental analysis of steel alloys. 
+	According to the observations presented in the previous section, this section focuses on discussing the findings and highlighting points that appear to be important in the qualitative and quantitative analysis of LIBS spectra in the context of steel grade classification and concentration estimation.
 	
-	As observed in Figure~\ref{fig:min-max}, the spectra acquired from the same steel grade, but with two different concentrations of alloying elements, showed no noticeable differences. This suggests that accurately detecting small variations within a specific steel grade is likely to be very challenging. It was also found that the LIBS spectra of two different steel grades from the same category are highly similar, indicating that training a machine learning model on LIBS spectra to reliably classify grades within the same category may also be difficult. In contrast, differences in elemental concentrations become more apparent in the corresponding LIBS spectra when the steel grades belong to distinctly different categories, such as tool steel versus stainless steel.
-	
-	
-	As a general rule of thumb, if there is no significant change in the observed patterns (in this case, the LIBS spectrum), machine learning models designed to recognize and classify such patterns are unlikely to achieve high performance. Moreover, training a model on a dataset with minimal variation can easily result in overfitting. Therefore, in the context of quantitative analysis of LIBS signals using machine learning, it is advisable to include a more diverse range of steel grades in the training set.
+	As observed in Figure~\ref{fig:min-max}, the spectra acquired from the same steel grade but with two different concentrations of alloying elements showed no noticeable differences. It was also found that the LIBS spectra of two different steel grades within the same category are highly similar. As a general rule, if there is no significant variation in the observed patterns (in this case, the LIBS spectra), machine learning models designed to recognize and classify such patterns are unlikely to perform well. Moreover, training a model on a dataset with minimal variation can easily lead to overfitting. In contrast, differences in elemental concentrations become more apparent in the corresponding LIBS spectra when the steel grades belong to distinctly different categories, such as carbon steel versus stainless steel. In other words, simply varying elemental concentrations within their predefined ranges may not produce a dataset sufficiently diverse to capture the true statistical characteristics of a given steel grade. This is especially true when other factors, such as electron temperature and density, can influence the spectral profile more effectively and noticeably than changes in elemental concentration alone. Therefore, creating a dataset solely by altering concentrations within the allowed range is not a reliable strategy for providing a robust dataset to train machine learning algorithms for classification or concentration estimation.
 	
 	
-	The characteristics of a LIBS spectrum---including the number of detected peaks, absolute and relative intensities of atomic emission lines, continuum background, and other features---depend on numerous factors. These include laser pulse energy and duration, focusing conditions, the detection system, and acquisition parameters (integration time, delay time, etc.).  
-	When comparing spectra obtained with different LIBS systems or under varying experimental conditions, these factors must be considered. Even when analysing the same sample, differences in experimental setup will produce spectra that are similar but not identical. According to \cite{AppliedPhotonics2019LIBSQualitative} key points to consider when interpreting a LIBS spectrum are:
+	There are many parameters that influence the LIBS spectrum in practice. However, in \texttt{simLIBS}, the user has access to only a limited subset of these parameters. In reality, factors such as electron temperature ($T_e$) and electron density ($n_e$) cannot be directly controlled by the user, even though they are adjustable in \texttt{simLIBS}.
+	  
 	
-	\begin{enumerate}[label=\textbullet]
-		\item \textbf{Ionisation states:}  
-		Under the typical power densities employed in LIBS experiments (a few tenths of~GW/cm\textsuperscript{2}), spectra generally contain emission lines from neutral atoms (I) and singly ionised species (II). Higher ionisation states are not expected.
-		
-		\item \textbf{Plasma brightness:}  
-		The number of emission peaks detected depends on plasma brightness, which is influenced by laser pulse energy, focusing conditions, and related parameters. A bright/hot plasma produces more and stronger emission lines than a cooler plasma for the same sample.
-		
-		\item \textbf{Sample composition:}  
-		Elemental composition affects line density. For example, pure Fe, Ti, Zr, Ni, or Cr can yield hundreds of peaks, whereas Si, Al, or Zn produce comparatively few.
-		
-		\item \textbf{Acquisition time parameters:}  
-		Both the number and intensity of detected lines depend on integration time and delay time. A delay between plasma formation and detection is often used to reduce continuum emission and Doppler-broadened lines present in the early plasma phase. However, long delays may suppress ionic lines due to their shorter lifetimes compared to neutral lines. The optimal delay time should be determined experimentally.
-		
-		\item \textbf{Spectral interferences:}  
-		Limited spectrometer resolution can cause apparent peaks to be composites of multiple emission lines from the same or different elements.
-		
-		\item \textbf{Element concentration:}  
-		The concentration of an element influences both the number and intensity of its emission lines. Trace elements may show only their strongest lines. Doubling the concentration does not necessarily double line intensities, and identical concentrations in different matrices may yield different intensities (see the tutorial \emph{General Procedure for Quantitative Analysis with LIBS}).
-		
-		\item \textbf{Collection and detection efficiency:}  
-		The efficiency of the optical collection and detection system modulates the observed spectrum. For instance, if BK7 optics are used, ultraviolet emission lines will be blocked and absent from the recorded spectrum.
-		
-		\item \textbf{Practical Issues regarding Te and Ne:}  
-		ter ter ter ter ter ter.
-		
-		\item \textbf{it seems stupid to generate dataset without knowing the phisics and state of nature of the problem:}  
-		ter ter ter ter ter ter
-		
-		\item \textbf{can we use LIBS LIBS in practice to differentiate the very similar steel grades or we should just use LIBS to categorise grades which are very different:}  
-		ter ter ter ter ter ter
-		
-		\item \textbf{Are Ne and Te correlated? they surely are. we cannot use any arbitrary values for them:}  
-		ter ter ter ter ter ter
-		
-	\end{enumerate}
+	The characteristics of a LIBS spectrum—including the number of detected peaks, the absolute and relative intensities of atomic emission lines, the continuum background, and other spectral features—depend on numerous factors. These include laser pulse energy and duration, focusing conditions, the detection system, and acquisition parameters (e.g., integration time and delay time). 	  
+	When comparing spectra obtained with different LIBS systems or under varying experimental conditions, these factors must be taken into account. Even when analyzing the same sample, variations in the experimental setup can lead to spectra that are similar but not identical \cite{AppliedPhotonics2019LIBSQualitative}.
 	
+	Another important point in LIBS spectrum analysis is that each element has well-established and well-documented spectral specifications. Every element exhibits a unique wavelength “fingerprint,” characterized by specific peaks and spectral lines within defined ranges. By leveraging this knowledge, spectrum analysis can be focused on the elements of interest and their corresponding wavelength bands. Incorporating prior knowledge of the intrinsic and constant properties of the constituent elements in steel grades can support the development of models that more accurately capture the realistic behavior of LIBS spectra. 
 	
+	 
+	 
 	
-	
-%	Example input table:
-%	
-%	\begin{center}
-%		\begin{tabular}{cccc}
-%			\toprule
-%			W & H & He & name \\
-%			\midrule
-%			50 & 25 & 25 & A \\
-%			30 & 60 & 10 & B \\
-%			40 & 40 & 20 & C \\
-%			\bottomrule
-%		\end{tabular}
-%	\end{center}
-	
-%	\section{Educational and Visualization Tools}
-%	simLIBS supports animated visualizations of how LIBS spectra change with:
+	\section{Conlusion}
+	According to the material mentioned in the previous sections, the following considerations seem to be very beneficial for developing capable models for analyzing LIBS spectra for steel grade classification and concentration estimation.
 %	\begin{itemize}
-%		\item Spectral resolution,
-%		\item Electron temperature (\texttt{Te}),
-%		\item Electron density (\texttt{Ne}).
+%		\item \textbf{Problem statement:} Utilizing LIBS spectrum for analysins steel grades generally is perform to aim two different problems: classification, and concentration estimation. in estimation scenario the peaks at specified waveleangths are measured and by comparing those with peake achives from sample references, the concentrations of elements is estimated. It is clear the physical situations and equipment setting should be fixed during acquiring the spectrum of refrence sample, and test samples. It is a well-known precedure that the intensities acquired by LISB are compared to actual percentations of  reference samples to find the relationship between them. this relationship usually is refered as calibration curves. in this scenario the amplitude of peak and the corresponding wavelenghs are very impoetaant to create a accurate estimatior. On the other hand and in contrast to estimation, in classification, the goal is to decide about the category that the sample belongs to. to this aim the general structure of a new sample is compared with those that are targeted by clasification method. this can be used by macchine learning algorithm to learn the structure and distinguishing characteristics of spectrum of each category and based on them decide about the class of the new sample. most probably the MEDALS project is aiming at classification. 
+%		\item \textbf{Fixing the measurement parameters and using the same setting:} In eigher case (classification, or concentration estimation) the settins and parameters for creating LIBS specrum should be fixed. In reality even by considering fix setting, the same LIBS device do not generate exactly the same spectrum for the same sample in multiple measurements, as the nature of plasma and the phisics involed in acquiring signal has some level of interinsic uncertanty by its own. therefore fixing the setting in measurements is a fundamental requirement to insure that the intrinsic nature of the plasma and wavelength registration technique remain as the only source of uncertainty. In the case using similator like simLIBS, one can fix the parameters like, $T_e$, $N_e$, and ionisation states. Under the typical power densities employed in LIBS experiments (a few tenths of~GW/cm\textsuperscript{2}), spectra generally contain emission lines from neutral atoms (I) and singly ionised species (II). Higher ionisation states are not expected.and add a suitable source of noise that are capable of reflecting the real noise in LIBS spectrum. in the classification scenario altering the concentrations of sample could also be considered, however as mentioned in earlier sections it could not be enough. al
+%		\item \textbf{State of nature:} the term “state of nature” refers to the true underlying situation or condition that affects outcomes but may not be directly observed \cite{Duda2001PatternClassification}. In either clasifcation, or estimation problem the data that is acquired to be fed into the model should be informative and contain discriminating informations. the actual range that need to be examined, or peak positions could be part of these information. in the case of LIBS spectrum for steal grade finding out the essential wavelength for elloying elements and some prior knowledge about the interinsic peaks of each element could be very beneficial in creating a reliable model.  
 %	\end{itemize}
 	
-%	\section{References and Applications}
-%	\begin{itemize}
-%		\item Developed by Marcin Kastek (IPPLM).
-%		\item Applied in LIBS research:
-%		\begin{itemize}
-%			\item M. Kastek et al., \textit{Spectrochimica Acta Part B} (2022).
-%			\item Chen et al., \textit{Optics Letters} (2023).
-%		\end{itemize}
-%	\end{itemize}
-%	
-%	\section{Summary Table}
-%	\begin{center}
-%		\begin{tabular}{@{}ll@{}}
-%			\toprule
-%			\textbf{Feature} & \textbf{Description} \\
-%			\midrule
-%			Purpose & Simulate LIBS spectra using NIST data \\
-%			Install & \verb|pip install simLIBS| \\
-%			Inputs & Te, Ne, elements, percentages, wavelength range, resolution \\
-%			Outputs & Plots, raw/interpolated spectra, CSV files \\
-%			Dataset Tool & \verb|create_dataset| for bulk generation \\
-%			Educational Use & Animations for teaching \\
-%			License & MIT, Python $\geq$ 3.8 \\
-%			\bottomrule
-%		\end{tabular}
-%	\end{center}
-	\section{Appendix}
+	 
+	 \begin{itemize}
+	 	\item \textbf{Problem statement:} Utilizing LIBS spectra for analyzing steel grades is generally performed to address two different problems: classification and concentration estimation. In the estimation scenario, the peaks at specified wavelengths are measured and, by comparing these with peaks obtained from reference samples, the concentrations of elements are estimated. It is clear that the physical conditions and equipment settings should be fixed during the acquisition of both reference and test sample spectra. A well-known procedure is to compare the intensities acquired by LIBS with the actual concentrations of the reference samples to find the relationship between them. This relationship is usually referred to as a calibration curve. In this scenario, the amplitude of the peak and the corresponding wavelengths are very important for creating an accurate estimator. On the other hand, in classification, the goal is to determine the category to which the sample belongs. To this aim, the general structure of a new sample is compared with those targeted by the classification method. Machine learning algorithms can be used to learn the structure and distinguishing characteristics of the spectra of each category and, based on this knowledge, decide on the class of a new sample. Most probably, the MEDALS project is aiming at classification. 
+	 	
+	 	\item \textbf{Fixing the measurement parameters and using the same settings:} In either case (classification or concentration estimation), the settings and parameters for creating LIBS spectra should be fixed. In practice, even under fixed settings, the same LIBS device may not generate exactly the same spectrum for the same sample in multiple measurements, since the nature of plasma and the physics involved in signal acquisition introduce some intrinsic uncertainty. Therefore, fixing the measurement settings is a fundamental requirement to ensure that the intrinsic properties of the plasma and the wavelength registration technique remain the only sources of uncertainty. In the case of using a simulator such as \textit{simLIBS}, one can fix parameters such as $T_e$, $N_e$, and ionization states. Under the typical power densities employed in LIBS experiments (a few tenths of~GW/cm\textsuperscript{2}), spectra generally contain emission lines from neutral atoms (I) and singly ionized species (II). Higher ionization states are not expected. It is also useful to add a suitable source of noise that reflects the real noise observed in LIBS spectra. In the classification scenario, altering the concentrations of the sample could also be considered; however, as mentioned in earlier sections, this may not be sufficient. 
+	 	
+	 	\item \textbf{State of nature:} The term \textit{state of nature} refers to the true underlying situation or condition that affects outcomes but may not be directly observed \cite{Duda2001PatternClassification}. In either classification or estimation problems, the data acquired to be fed into the model should be informative and contain discriminating information. The actual range that needs to be examined, or specific peak positions, could be part of this information. In the case of LIBS spectra for steel grading, identifying the essential wavelengths of alloying elements and having prior knowledge about the intrinsic peaks of each element could be very beneficial for creating a reliable model.
+	 \end{itemize}
+	 
+	
+	
+	
+	\section*{Appendix}
+	\textbf{Boltzmann distribution:}
 	From a physical perspective, the population of excited states follows the Boltzmann distribution:
 	\[
 	n_i \propto g_i \exp\left(-\frac{E_i}{k_B T_e}\right)
 	\]
 	where $E_i$ is the excitation energy of state $i$, $g_i$ is its degeneracy, and $k_B$ is Boltzmann’s constant. As $T_e$ increases, the population of higher-energy states rises, leading to stronger emissions at shorter wavelengths. Conversely, lower $T_e$ favors transitions from lower-energy states, which may appear relatively stronger due to the reduced population of higher-energy levels.
 	
-	\textbf{Key takeaway:} The effect of electron temperature on line intensity is wavelength-dependent. High-energy transitions become more prominent at higher $T_e$, while some lower-energy transitions may be relatively stronger at lower $T_e$. The spectral response is thus governed by the excitation energy of each atomic transition.
+	The effect of electron temperature on line intensity is wavelength-dependent. High-energy transitions become more prominent at higher $T_e$, while some lower-energy transitions may be relatively stronger at lower $T_e$. The spectral response is thus governed by the excitation energy of each atomic transition.
 	
 	
+	\textbf{Why temprature is measures in eV:}
 	In plasma physics and spectroscopy, the concept of electron temperature ($T_e$) is frequently expressed in units of electron volts (eV) rather than in the conventional Kelvin (K). This practice arises from the fact that temperature at the microscopic scale is fundamentally a measure of the average kinetic energy of particles. According to kinetic theory, the mean kinetic energy of a particle is related to the temperature by  
 	\[
 	\langle E \rangle = \frac{3}{2} k_B T,
 	\]  
 	where $\langle E \rangle$ is the average kinetic energy per particle, $k_B$ is the Boltzmann constant, and $T$ is the absolute temperature in Kelvin. Since the energies of atomic and electronic transitions, as well as ionization potentials, are naturally expressed in electron volts, it is convenient to use the same unit for electron temperature.  
 	
-	The conversion between the two units follows from $E = k_B T$, where $1~\text{eV} = 1.602 \times 10^{-19}~\text{J}$. This corresponds to approximately $11{,}600~\text{K}$. Thus, for example, an electron temperature of $T_e = 1.0$~eV corresponds to about $11{,}600$~K, while $T_e = 0.8$~eV and $T_e = 0.6$~eV correspond to roughly $9{,}300$~K and $7{,}000$~K, respectively.  
+	The conversion between the two units follows from $E = \frac{3}{2}k_B T$, where $1~\text{eV} = 1.602 \times 10^{-19}~\text{J}$. This corresponds to approximately $11{,}600~\text{K}$. Thus, for example, an electron temperature of $T_e = 1.0$~eV corresponds to about $11{,}600$~K, while $T_e = 0.8$~eV and $T_e = 0.6$~eV correspond to roughly $9{,}300$~K and $7{,}000$~K, respectively.  
 	
 	Expressing electron temperature in eV is particularly useful in the context of Laser-Induced Breakdown Spectroscopy (LIBS). In such plasmas, electrons collide with atoms and ions to excite them, and the excitation and ionization energies involved are typically quoted in electron volts. By describing $T_e$ directly in eV, it becomes straightforward to compare the thermal energy of the electron population with the energy thresholds required for specific transitions. For example, if a spectral line of iron requires an excitation energy of about 3~eV, a plasma with $T_e = 1$~eV will only have a small fraction of electrons energetic enough to excite that transition, whereas a plasma with $T_e = 5$~eV will have a much larger fraction of electrons capable of doing so. This direct comparability makes electron volts the most natural and practical unit for electron temperature in plasma spectroscopy.
 	
 	
 	
 	
-	\textbf{Effect of $N_e$ variation at fixed $T_e$}
-	When the electron density ($N_e$) is varied at a fixed electron temperature ($T_e$), the UV region of the spectrum (approximately 200--300~nm) is most sensitive to density effects. At low $N_e$, the UV peaks are sharp and tall because there is little collisional de-excitation, minimal self-absorption, and low continuum emission. As $N_e$ increases, the line width grows due to Stark broadening,
-	\[
-	\Delta \lambda_{\rm Stark} \propto N_e,
-	\]
-	collisional quenching reduces the effective emission probability,
-	\[
-	A_{ij}^{\rm eff} = \frac{A_{ij}}{1 + C_u/A_{ij}}, \quad C_u = N_e q_u,
-	\]
-	and self-absorption flattens strong lines, with optical depth
-	\[
-	\tau \propto N_l f_{ij} L.
-	\]
-	The continuum background also rises roughly as $N_e^2$, further lowering line contrast. Together, these effects make the UV peaks tallest and sharpest at low electron densities, and progressively flattened and blended at higher densities.  
-	
-	In the intermediate-wavelength range (roughly 300--450~nm), the behavior is different. Increasing $N_e$ favors neutral atoms through recombination and modifies the ionisation balance,
-	\[
-	\frac{n_{i+1}}{n_i} \propto \frac{1}{N_e} e^{-\chi_i/k_B T_e},
-	\]
-	which enhances emission in this band. However, higher $N_e$ also increases Stark broadening, merging nearby lines. As a result, at low $N_e$, the spectrum shows many narrow, resolved peaks, while at high $N_e$, fewer peaks appear but the total emission intensity grows, producing broader, stronger spectral features. These complementary trends in the UV and visible bands explain the characteristic two-regime behavior observed in plasma spectra.
+%	\textbf{Effect of $N_e$ variation at fixed $T_e$}
+%	When the electron density ($N_e$) is varied at a fixed electron temperature ($T_e$), the UV region of the spectrum (approximately 200--300~nm) is most sensitive to density effects. At low $N_e$, the UV peaks are sharp and tall because there is little collisional de-excitation, minimal self-absorption, and low continuum emission. As $N_e$ increases, the line width grows due to Stark broadening,
+%	\[
+%	\Delta \lambda_{\rm Stark} \propto N_e,
+%	\]
+%	collisional quenching reduces the effective emission probability,
+%	\[
+%	A_{ij}^{\rm eff} = \frac{A_{ij}}{1 + C_u/A_{ij}}, \quad C_u = N_e q_u,
+%	\]
+%	and self-absorption flattens strong lines, with optical depth
+%	\[
+%	\tau \propto N_l f_{ij} L.
+%	\]
+%	The continuum background also rises roughly as $N_e^2$, further lowering line contrast. Together, these effects make the UV peaks tallest and sharpest at low electron densities, and progressively flattened and blended at higher densities.  
+%	
+%	In the intermediate-wavelength range (roughly 300--450~nm), the behavior is different. Increasing $N_e$ favors neutral atoms through recombination and modifies the ionisation balance,
+%	\[
+%	\frac{n_{i+1}}{n_i} \propto \frac{1}{N_e} e^{-\chi_i/k_B T_e},
+%	\]
+%	which enhances emission in this band. However, higher $N_e$ also increases Stark broadening, merging nearby lines. As a result, at low $N_e$, the spectrum shows many narrow, resolved peaks, while at high $N_e$, fewer peaks appear but the total emission intensity grows, producing broader, stronger spectral features. These complementary trends in the UV and visible bands explain the characteristic two-regime behavior observed in plasma spectra.
 	
 		% ---------- References ----------
 	\newpage
