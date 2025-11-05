@@ -3,6 +3,7 @@
 
 % ---------- Packages ----------
 \usepackage[utf8]{inputenc}
+\usepackage{booktabs}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{graphicx}
@@ -17,9 +18,13 @@
 \usepackage{url} 
 \usepackage{amsthm}
 \usepackage[most]{tcolorbox}
+\usepackage{adjustbox}
 \newtheorem{lemma}{Lemma}
 \tcbuselibrary{theorems}
 \usepackage[hidelinks]{hyperref}  % his removes all colors and boxes 
+\usepackage{siunitx}    % for decimal alignment
+\usepackage{subcaption} % for subfigures
+
 
 
 
@@ -55,26 +60,79 @@
 	
 	
 	% ---------- Sections ----------
-	\section{Introduction} \label{h:intro}
+	\section{General Overview} \label{h:intro}
 	In this report, a detailed analysis of the LIBS (Laser-Induced Breakdown Spectroscopy) spectra for the samples provided by the LSA is presented. The study begins with the visualization of the spectra and an examination of their intrinsic properties, including peak intensities and corresponding wavelengths. In the next step, they are compared with the spectra generated using the NIST LIBS tool. Following this comparative analysis, general considerations for employing these spectra in training machine learning (ML) algorithms for steel grade classification are discussed. The report concludes with a set of open questions and points for clarification that need to be addressed.
 	
-	In many steel recycling operations, steel scrap is not fully sorted before processing. As a result, a single batch of scrap can contain a mixture of different kind of materials. This variability poses challenges for recycling, especially when high-quality or specialized steel is required. The presence of different alloying elements can significantly affect the properties of the recycled steel. Steel scrap is typically composed of various steel grades and sometimes even non-ferrous metals. Steel grades are classifications used to distinguish different types of steel based on their chemical composition, mechanical properties, and intended applications. These grades are standardized by various national and international organizations to ensure consistency and interoperability across industries.
-	To address these challenges, advanced analytical techniques such as Laser-Induced Breakdown Spectroscopy (LIBS), X-ray fluorescence (XRF), and optical emission spectroscopy (OES) are employed. These methods allow recyclers to analyze the elemental composition of scrap quickly and accurately. LIBS, in particular, is valued for its speed and ability to detect multiple elements simultaneously. 
-	LIBS is a powerful analytical technique for identifying steel grades and determining the percentage of alloying elements \cite{Legnaioli_LIBS_Metals_2014}. The process involves focusing a high-energy laser pulse on the steel surface, which generates a microplasma. As this plasma cools, it emits light containing spectral lines unique to the elements present in the sample. These spectral signatures are then analyzed to identify and quantify the elemental composition of the steel.
-	By identifying the specific steel grades and separating unwanted materials, these techniques help ensure that the recycled steel meets the necessary quality standards. 
+	The data is provided in two categories: One folder contains the LIBS readings for standard calibration grades (samples).  For each sample there are 5–6 LIBS readings. The table below shows the specifications provided by the LSA for the calibration grades:
+	
 
- 
- 
-	For steel grade classification, LIBS data can be processed using machine learning models. These models can classify steel types based on their spectral properties \cite{Lin2024}. 	In terms of quantitative analysis, LIBS can determine the concentration of alloying elements. This is typically done using calibration models, where known concentrations are used to train regression algorithms. Studies, such as  \cite{Traparic2023} and  \cite{Jiang2020}, demonstrate the application of machine learning techniques for estimating the elemental composition of alloys.
+\begin{table}[ht]
+	\centering
+	\caption{Specifications for calibration grades.}
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tabular}{
+				c
+				S[table-format=2.3]
+				S[table-format=2.3]
+				S[table-format=2.3]
+				S[table-format=2.3]
+				S[table-format=2.3]
+				S[table-format=2.2]
+				S[table-format=2.3]
+				S[table-format=2.3]
+				S[table-format=2.3]
+				S[table-format=2.3]
+				S[table-format=3.1]
+				S[table-format=2.2]
+				S[table-format=3.1]
+				S[table-format=2.3]
+			}
+			\toprule
+			\textbf{No.} & {C (\%)} & {Si (\%)} & {Mn (\%)} & {P (\%)} & {S (\%)} & {Cr (\%)} & {Mo (\%)} & {Ni (\%)} & {Sn (\%)} & {Pb (\%)} & {Zn (\%)} & {Cu (\%)} & {Fe (\%)} & {Al (\%)} \\
+			\midrule
+			469 & 0.279 & 0.421 & 0.598 & 0.015 & 0.020 & 11.93 & {} & 0.246 & {} & {} & {} & {} & {} & {} \\
+			470 & 0.153 & 0.335 & 0.235 & 0.024 & 0.035 & 17.68 & {} & 0.369 & {} & {} & {} & {} & {} & {} \\
+			471 & 0.095 & 0.326 & 0.417 & 0.018 & 0.023 & 23.85 & {} & 0.960 & {} & {} & {} & {} & {} & {} \\
+			472 & 0.227 & 1.050 & 1.020 & 0.032 & 0.029 & 15.82 & 0.661 & 1.950 & {} & {} & {} & {} & {} & {} \\
+			473 & 0.172 & 0.604 & 0.494 & 0.019 & 0.030 & 9.06  & 0.950 & {} & {} & {} & {} & {} & {} & {} \\
+			551 & {} & 0.018 & {} & 1.01 & {} & {} & {} & {0.76-} & 8.92 & 0.79 & 0.74 & 87.4 & {0.20-} & 0.052 \\
+			552 & {} & 0.019 & {} & 0.77 & {} & {} & {} & {0.56-} & 9.78 & 0.63 & 0.35 & 87.7 & {0.10-} & 0.023 \\
+			553 & {} & 0.022 & {} & 0.68 & {} & {} & {} & {0.44-} & {10.8-} & 0.47 & 0.49 & 87.0 & 0.056 & 0.017 \\
+			554 & {} & 0.038 & {} & 0.41 & {} & {} & {} & {0.22-} & {11.3-} & 0.34 & 0.22 & 87.4 & 0.022 & 0.005 \\
+			555 & {} & 0.036 & {} & 0.18 & {} & {} & {} & {0.11-} & {12.1-} & 0.24 & 0.16 & 87.1 & 0.010 & {<0.005} \\
+			556 & {} & {<0.005} & {} & 0.10 & {} & {} & {} & 0.014 & {13.2-} & 0.16 & 0.09 & 86.4 & 0.004 & {<0.005} \\
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
 	
-	A well-curated and representative LIBS dataset is fundamental to the success of machine learning models in spectroscopic analysis. The accuracy, robustness, and generalizability of predictive models—whether for classification or quantitative analysis—are directly influenced by the quality and diversity of the training data. A comprehensive dataset should encompass a wide range of sample compositions, experimental conditions, and spectral variations to ensure the model can learn meaningful patterns and avoid overfitting. Without a reliable dataset, even the most sophisticated algorithms may yield poor predictions.
-	
-	Given the vast number of standardized steel grades, generating a reliable LIBS dataset begins with narrowing the scope to a subset of grades that are most relevant to the intended application (this subset could include the steel grades presented in Deliverable 3.2, Figure 5). Once this subset is defined, the next step involves simulating variations in elemental concentrations within each selected grade to reflect realistic manufacturing and compositional differences. The final stage is to generate LIBS spectra from the elemental compositions provided by the statistical model. This report focuses specifically on the statistical methodologies that can be employed to generate realistic variations in elemental concentrations.
-	
-	The remainder of this report is organized as follows. Section \ref{h:Probability distributions} provides a brief overview of probability distributions, followed by an introduction to several distributions that may be useful for modeling variations in steel grades. Section \ref{h:Statistical modeling} focuses on practical aspects of generating samples from specific probability density functions. Section \ref{h:Discussion} presents a discussion of the different modeling approaches, and suggest a practical solution, and finally Section \ref{h:Conclusion} provides a summary.
+\end{table}
+Figure \ref{fig: 469} presents all LIBS readings for standard grade 469 in a single plot. From this figure, it appears that some of the readings are saturated. To allow for clearer observation, all individual readings, along with the corresponding NIST LIBS spectrum for the same sample, are plotted separately in Figure \ref{fig:469-libs-NIST}.
+
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{469_LSA_ava_S20251008173111_E20251008173212.png}
+	\caption{All five readings of LIBS spectra for sample 469}
+	\label{fig: 469}
+\end{figure}
+Based on the observations from Figures \ref{fig:469} and \ref{fig:469-NIST}, it is evident that the spectral structure and observed emission patterns for the same element (in this case, sample 469) differ significantly from the reference spectra provided by the NIST LIBS database. This discrepancy suggests that the intensities captured using a practical, experimental LIBS device can deviate substantially from those generated synthetically using theoretical models based on the Saha–Boltzmann equations. Such differences may arise from various experimental factors, including instrumental sensitivity, plasma temperature fluctuations, matrix effects, and deviations from local thermodynamic equilibrium (LTE).
+\begin{figure}[htbp]
+	\centering
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{cc}
+			\subcaptionbox{Reading 1\label{fig:469-reading1}}{\includegraphics[width=0.48\textwidth]{469-reading1.png}} &
+			\subcaptionbox{Reading 2\label{fig:469-reading2}}{\includegraphics[width=0.48\textwidth]{469-reading2.png}} \\[1ex]
+			\subcaptionbox{Reading 3\label{fig:469-reading3}}{\includegraphics[width=0.48\textwidth]{469-reading3.png}} &
+			\subcaptionbox{Reading 4\label{fig:469-reading4}}{\includegraphics[width=0.48\textwidth]{469-reading4.png}} \\[1ex]
+			\subcaptionbox{Reading 5\label{fig:469-reading5}}{\includegraphics[width=0.48\textwidth]{469-reading5.png}} &
+			\subcaptionbox{NIST LIBS\label{fig:469-NIST}}{\includegraphics[width=0.48\textwidth]{469-NIST.png}} \\
+		\end{tabular}
+	\end{adjustbox}
+	\caption{Comparison of LSA LIBS spectra with NIST for the sample 469.}
+	\label{fig:469-libs-NIST}
+\end{figure}
 
 	
-	\section{Analyzing the data} \label{h:Probability distributions}
+\section{Analyzing the data} \label{h:Probability distributions}
 	Steel grades are defined by specific characteristics and consist of predefined ranges of alloying elements. For example, Table \ref{table:aisi4042} illustrates the concentration ranges of the constituent elements in the steel grade AISI 4042 \cite{matweb2025}.  
 	\begin{table}[h!]
 		\centering
