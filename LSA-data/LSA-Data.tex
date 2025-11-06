@@ -61,7 +61,7 @@
 	
 	% ---------- Sections ----------
 	\section{General Overview} \label{h:intro}
-	In this report, a detailed analysis of the LIBS (Laser-Induced Breakdown Spectroscopy) spectra for the samples provided by the LSA is presented. The study begins with the visualization of the spectra and an examination of their intrinsic properties, including peak intensities and corresponding wavelengths. In the next step, they are compared with the spectra generated using the NIST LIBS tool. Following this comparative analysis, general considerations for employing these spectra in training machine learning (ML) algorithms for steel grade classification are discussed. The report concludes with a set of open questions and points for clarification that need to be addressed.
+	In this report, a detailed analysis of the real LIBS dat, provided by the LSA, is presented. The study begins with the visualization of the spectra and an examination of their intrinsic properties, including peak intensities and corresponding wavelengths. They are also compared with the spectra generated using the NIST LIBS tool. Following this comparative analysis, general considerations for employing these spectra in training machine learning (ML) algorithms for steel grade classification are discussed. The report concludes with a set of open questions and points for clarification that need to be addressed.
 	
 	The data is provided in two categories: One folder contains the LIBS readings for standard calibration grades (samples).  For each sample there are 5–6 LIBS readings. The table below shows the specifications provided by the LSA for the calibration grades:
 	
@@ -133,6 +133,7 @@ Based on the observations from Figure \ref{fig: 469} and Figure \ref{fig:469-lib
 
 	
 \section{Analyzing the data} \label{h:Probability distributions}
+
 	Steel grades are defined by specific characteristics and consist of predefined ranges of alloying elements. For example, Table \ref{table:aisi4042} illustrates the concentration ranges of the constituent elements in the steel grade AISI 4042 \cite{matweb2025}.  
 	\begin{table}[h!]
 		\centering
