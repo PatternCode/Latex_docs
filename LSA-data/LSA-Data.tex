@@ -44,7 +44,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{\thepage}
-\lhead{Statistical distributions for modeling steel grade compositions}
+\lhead{A report on Real LIBS spectrum from LSA}
 
 % ---------- Title ----------
 \title{A report on Real LIBS spectrum from LSA }
@@ -61,14 +61,16 @@
 	
 	% ---------- Sections ----------
 	\section{General Overview} \label{h:intro}
-	In this report, a detailed analysis of the real LIBS dat, provided by the LSA, is presented. The study begins with the visualization of the spectra and an examination of their intrinsic properties, including peak intensities and corresponding wavelengths. They are also compared with the spectra generated using the NIST LIBS tool. Following this comparative analysis, general considerations for employing these spectra in training machine learning (ML) algorithms for steel grade classification are discussed. The report concludes with a set of open questions and points for clarification that need to be addressed.
+	This report presents a detailed analysis of real LIBS data provided by the LSA. The study begins with the visualization of the spectra and an examination of their intrinsic properties, including peak intensities and corresponding wavelengths. These spectra are then compared with those generated using the NIST LIBS tool. Following this comparative analysis, general considerations for using the spectra in training machine learning (ML) algorithms for steel grade classification are discussed. The report concludes with a set of open questions and points requiring further clarification.
 	
-	The data is provided in two categories: One folder contains the LIBS readings for standard calibration grades (samples).  For each sample there are 5–6 LIBS readings. The table below shows the specifications provided by the LSA for the calibration grades:
+	The data is provided in two folders: One folder contains the LIBS readings for 11 standard calibration grades (samples).  For each sample there are 5–6 LIBS readings. The Table \ref{tab:Specifications for calibration grades} shows the specifications provided by the LSA for the calibration grades. The other folder contains the unlabeled LIBS Specra for random unknown materials. 
 	
 
 \begin{table}[ht]
+	
 	\centering
 	\caption{Specifications for calibration grades.}
+	\label{tab:Specifications for calibration grades}
 	\begin{adjustbox}{width=\textwidth}
 		\begin{tabular}{
 				c
@@ -114,7 +116,7 @@ Figure \ref{fig: 469} presents all LIBS readings for standard grade 469 in a sin
 	\caption{All five readings of LIBS spectra for sample 469}
 	\label{fig: 469}
 \end{figure}
-Based on the observations from Figure \ref{fig: 469} and Figure \ref{fig:469-libs-NIST}, it is evident that the spectral structure and observed emission patterns for the same element (in this case, sample 469) differ significantly from the reference spectra provided by the NIST LIBS database. This discrepancy suggests that the intensities captured using a practical, experimental LIBS device can deviate substantially from those generated synthetically using theoretical models based on the Saha–Boltzmann equations. Such differences may arise from various experimental factors, including instrumental sensitivity, plasma temperature fluctuations, matrix effects, and deviations from local thermodynamic equilibrium (LTE).
+Based on the observations from Figure \ref{fig: 469} and Figure \ref{fig:469-libs-NIST}, it is evident that the spectral structure and observed emission patterns for the same element (in this case, sample 469) differ significantly from the reference spectra provided by the NIST LIBS database. This discrepancy suggests that the intensities captured using a practical, experimental LIBS device can deviate substantially from those generated synthetically using theoretical models based on the Saha–Boltzmann equations. Such differences may arise from various experimental factors, including instrumental sensitivity or plasma temperature fluctuations.
 \begin{figure}[htbp]
 	\centering
 	\begin{adjustbox}{max width=\textwidth}
@@ -132,7 +134,25 @@ Based on the observations from Figure \ref{fig: 469} and Figure \ref{fig:469-lib
 \end{figure}
 
 	
-\section{Analyzing the data} \label{h:Probability distributions}
+\section{Wavelengths and intensities} \label{h:Wavelengths and intensities}
+As mentioned in an earlier section, the intensities of the LSA spectra differ significantly from those obtained from the NIST LIBS dataset. Compared to the NIST spectra, the LSA intensities appear distorted and, in some cases, saturated. This discrepancy could pose challenges in developing a model that yields consistent results across both synthetic data (from the NIST LIBS tool) and real spectra.
+
+in case of wavelenths,  also it was observed that the sampling interval for LSA data is not fixed. the intervals range from 0.035 to 0.047 (nm). Figure \ref{fig:Interval_histogram} show the histogram of the intervals for LSA data and Figure \ref{fig:Interval_distribution.png} show the distribution of sampling interval in the whole spectral range (in this case from 246.018(nm) to 414.849(nm)). 
+
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{Interval_histogram.png}
+	\caption{Histogram of sampling intervals}
+	\label{fig:Interval_histogram}
+\end{figure}
+
+Figure....
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{Interval_distribution.png}
+	\caption{Interval distribution}
+	\label{fig:Interval_distribution.png}
+\end{figure}
 
 	Steel grades are defined by specific characteristics and consist of predefined ranges of alloying elements. For example, Table \ref{table:aisi4042} illustrates the concentration ranges of the constituent elements in the steel grade AISI 4042 \cite{matweb2025}.  
 	\begin{table}[h!]
